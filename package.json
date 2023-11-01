@@ -10,7 +10,9 @@
     "test": "jest --watchAll",
     "prepare": "husky install",
     "build:devclient:ios": "eas build --profile development-simulator --platform ios --local",
-    "build:devclient:android": "eas build --profile development --platform android --local"
+    "build:devclient:android": "eas build --profile development --platform android --local",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --fix --cache"
   },
   "jest": {
     "preset": "jest-expo"
