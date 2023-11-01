@@ -1,8 +1,8 @@
-import { Redirect } from "expo-router";
-import React from "react";
+import { Redirect } from 'expo-router';
+import React from 'react';
 
 function RootScreen() {
-  return <Redirect href={"/login"} />;
+    return <Redirect href="/login" />;
 }
 
 export default RootScreen;
