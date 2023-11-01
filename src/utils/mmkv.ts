@@ -1,4 +1,4 @@
-import { MMKV } from "react-native-mmkv";
+import { MMKV } from 'react-native-mmkv';
 
 const mmkv = new MMKV();
 
