@@ -27,3 +27,17 @@ Project-101-Heart-Connect is designed as a stepping stone for budding developers
    ```bash
    git clone https://github.com/your-github-username/project-101-heart-connect.git
    ```
+
+### Source Directory Structure
+
+```
+  src/
+    components/
+    modules/
+      [modulename]/
+                components/
+                hooks/
+                utils/
+    hooks/
+    utils/
+```

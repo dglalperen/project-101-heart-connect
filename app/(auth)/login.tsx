@@ -1,18 +1,19 @@
 import { Link } from "expo-router";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-function NotFoundScreen() {
+function LoginScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>This screen doesn't exist.</Text>
+      <Text style={styles.title}>Login Screen</Text>
       <Link href="/home" style={styles.link}>
-        <Text style={styles.linkText}>Go to home screen!</Text>
+        <Text style={styles.linkText}>Login</Text>
       </Link>
     </View>
   );
 }
 
-export default NotFoundScreen;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
