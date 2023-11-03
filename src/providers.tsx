@@ -1,10 +1,9 @@
 import { ThemeProvider } from '@react-navigation/native';
+import tamaguiConfig from '@src/tamagui';
+import { AppNavigationDarkTheme, AppNavigationTheme } from '@src/theme/navigation.theme';
 import React, { PropsWithChildren, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
 import { TamaguiProvider, Theme } from 'tamagui';
-
-import tamaguiConfig from './tamagui';
-import { AppNavigationDarkTheme, AppNavigationTheme } from './theme/navigation.theme';
 
 function Providers({ children }: PropsWithChildren) {
     const activeTheme = useColorScheme();

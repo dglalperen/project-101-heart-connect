@@ -1,3 +1,3 @@
-import tamaguiConfig from './config';
+import tamaguiConfig from '@src/tamagui/config';
 
 export default tamaguiConfig;

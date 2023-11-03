@@ -1,4 +1,4 @@
-import { Screen } from '@src/components/screen';
+import Screen from '@src/components/screen';
 import React from 'react';
 import { H3 } from 'tamagui';
 

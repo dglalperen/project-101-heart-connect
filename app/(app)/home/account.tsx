@@ -1,4 +1,4 @@
-import { Screen } from '@src/components/screen';
+import Screen from '@src/components/screen';
 import { Link } from 'expo-router';
 import React from 'react';
 import { Button, Text } from 'tamagui';

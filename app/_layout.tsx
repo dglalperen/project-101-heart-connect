@@ -1,7 +1,7 @@
+import useFontsLoader from '@src/hooks/use-fonts-loader';
 import Providers from '@src/providers';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
-import useFontsLoader from 'src/hooks/use-fonts-loader';
 
 export const unstable_settings = {
     initialRouteName: '',
