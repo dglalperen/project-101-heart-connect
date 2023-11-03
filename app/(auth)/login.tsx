@@ -1,39 +1,23 @@
+import { Screen } from '@src/components/screen';
 import { Link } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, Text } from 'tamagui';
 
 function LoginScreen() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Login Screen</Text>
+        <Screen
+            justifyContent="center"
+            alignItems="center"
+            gap="$5">
+            <Text>Login Screen</Text>
             <Link
                 href="/home"
-                style={styles.link}>
-                <Text style={styles.linkText}>Login</Text>
+                replace
+                asChild>
+                <Button theme="active">Login</Button>
             </Link>
-        </View>
+        </Screen>
     );
 }
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    link: {
-        marginTop: 15,
-        paddingVertical: 15,
-    },
-    linkText: {
-        fontSize: 14,
-        color: '#2e78b7',
-    },
-});

@@ -41,3 +41,9 @@ expo-env.d.ts
 # @end expo-cli
 .idea
 .eslintcache
+
+# Tamagui
+.tamagui
+
+# Editor
+.vscode

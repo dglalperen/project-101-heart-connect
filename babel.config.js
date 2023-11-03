@@ -5,7 +5,15 @@ module.exports = function (api) {
         plugins: [
             // Required for expo-router
             'expo-router/babel',
-            'react-native-reanimated/plugin'
+            [
+                '@tamagui/babel-plugin',
+                {
+                    components: ['tamagui'],
+                    config: './src/tamagui/config.ts',
+                    logTimings: true,
+                },
+            ],
+            'react-native-reanimated/plugin',
         ],
     };
 };

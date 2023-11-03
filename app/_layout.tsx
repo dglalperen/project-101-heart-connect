@@ -1,3 +1,4 @@
+import Providers from '@src/providers';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import useFontsLoader from 'src/hooks/use-fonts-loader';
@@ -21,7 +22,11 @@ function RootLayout() {
         return null;
     }
 
-    return <Stack screenOptions={{ headerShown: false }} />;
+    return (
+        <Providers>
+            <Stack screenOptions={{ headerShown: false }} />
+        </Providers>
+    );
 }
 
 export default RootLayout;
