@@ -41,3 +41,35 @@ Project-101-Heart-Connect is designed as a stepping stone for budding developers
     hooks/
     utils/
 ```
+
+### Sitemap
+
+```
+  /
+    (app)
+         (onboarding)
+                  /complete-profile
+                  /gender
+                  /passions
+                  /friends
+                  /notifications
+          /home
+              /discover
+              /matches
+              /messages
+              /account
+          /match
+          /chat
+          /profile
+                /[profileId]
+                          /index
+                          /photo
+          /stories
+          
+        
+    (auth)
+         /onboarding
+         /login
+         /signup
+         /verify
+```
