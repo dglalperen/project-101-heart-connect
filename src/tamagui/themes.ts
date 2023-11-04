@@ -12,11 +12,11 @@ const colorPalette_Light = [
     '#f36e77',
     '#ee5967',
     '#e94057',
-    '#000000',
+    '#0A0A0A',
 ];
 
 const colorPalette_Dark = [
-    '#000000',
+    '#0A0A0A',
     '#030000',
     '#130103',
     '#290508',
@@ -37,7 +37,7 @@ const themesBuilder = createThemeBuilder()
     })
     .addTemplates({
         base: {
-            background: 0,
+            background: 1,
             backgroundHover: 3,
             backgroundPress: 4,
             backgroundFocus: 5,
@@ -74,7 +74,7 @@ const themesBuilder = createThemeBuilder()
             mask: 'soften',
             override: {
                 color: 0,
-                background: -1,
+                background: -2,
             },
         },
         subtle: {
