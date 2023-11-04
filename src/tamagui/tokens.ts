@@ -9,6 +9,7 @@ const customToken = createTokens({
         textPrimary70: 'rgba(0,0,0,.7)',
         textPrimary40: 'rgba(0,0,0,.4)',
         textSecondary: '#323755',
+        primary: '#E94057',
     },
 });
 
