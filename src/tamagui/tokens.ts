@@ -5,7 +5,7 @@ const customToken = createTokens({
     ...tokens,
     color: {
         ...tokens.color,
-        textPrimary100: '#00000',
+        textPrimary100: '#000000',
         textPrimary70: 'rgba(0,0,0,.7)',
         textPrimary40: 'rgba(0,0,0,.4)',
         textSecondary: '#323755',
