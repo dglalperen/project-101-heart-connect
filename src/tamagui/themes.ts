@@ -37,7 +37,7 @@ const themesBuilder = createThemeBuilder()
     })
     .addTemplates({
         base: {
-            background: 1,
+            background: 0,
             backgroundHover: 3,
             backgroundPress: 4,
             backgroundFocus: 5,
