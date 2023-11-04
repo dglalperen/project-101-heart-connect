@@ -1,30 +1,34 @@
 import { createFont } from 'tamagui';
 
 const genericFontSizes = {
-    1: 10,
+    1: 11,
     2: 12,
-    3: 14,
-    4: 16,
-    $true: 14,
-};
-
-const headingFontSizes = {
-    1: 16,
-    2: 18,
-    3: 24,
-    4: 34,
-    $true: 18,
+    3: 13,
+    4: 14,
+    true: 14,
+    5: 16,
+    6: 18,
+    7: 20,
+    8: 23,
+    9: 30,
+    10: 46,
+    11: 55,
+    12: 62,
+    13: 72,
+    14: 92,
+    15: 114,
+    16: 134,
 };
 
 const genericLineHeights = {
     1: 21,
     2: 24,
-    $true: 21,
+    true: 21,
 };
 const headingLineHeights = {
     1: 36,
     2: 51,
-    $true: 36,
+    true: 36,
 };
 
 const genericFontFaces = {
@@ -46,7 +50,7 @@ const bodyFont = createFont({
 });
 
 const headingFont = createFont({
-    size: headingFontSizes,
+    size: genericFontSizes,
     lineHeight: headingLineHeights,
     face: genericFontFaces,
 });
