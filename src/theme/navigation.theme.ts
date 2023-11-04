@@ -21,7 +21,7 @@ export const AppNavigationTheme: Theme = {
         background: tamaguiConfig.themes.light.background.val,
         card: tamaguiConfig.themes.light.backgroundFocus.val,
         border: tamaguiConfig.themes.light.borderColor.val,
-        primary: tamaguiConfig.themes.dark.primary.val,
+        primary: tamaguiConfig.themes.light.primary.val,
         notification: tamaguiConfig.themes.light.background.val,
         text: tamaguiConfig.themes.light.color.val,
     },
