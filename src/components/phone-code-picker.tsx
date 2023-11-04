@@ -1,9 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Country, fetchCountry } from '@src/utils/helpers';
+import CountryPickerSheet, { Country, fetchCountry } from '@src/components/country-picker-sheet';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { XStack, SizableText, Button, useTheme } from 'tamagui';
-
-import CountryPickerSheet from './country-picker-sheet';
 
 type PhoneCodePickerProps = {
     onChangePhoneCode: (phoneCode: string) => void;
@@ -29,7 +27,7 @@ function PhoneCodePicker(props: PhoneCodePickerProps) {
         (async () => {
             // Will be adding logic to get the current phoneCode based on locale of device
             if (!mounted.current) {
-                const country = fetchCountry(phoneCode ?? '+1');
+                const country = await fetchCountry(phoneCode ?? '+1');
                 if (country) {
                     setSelectedCountry(country);
                     onChangePhoneCode(country.phone_code);

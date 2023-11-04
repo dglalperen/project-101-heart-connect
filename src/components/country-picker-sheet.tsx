@@ -1,10 +1,22 @@
+import jsons from '@assets/jsons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 import InputWrapper from '@src/components/input-wrapper';
-import { COUNTRIES, Country } from '@src/utils/helpers';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { H3, Input, ListItem, Sheet, SheetProps, Stack, YStack, useTheme } from 'tamagui';
+
+export type Country = {
+    iso: string;
+    phone_code: string;
+    name: string;
+    flag: string;
+};
+
+export const fetchCountry = async (phoneCode: string): Promise<Country | null> => {
+    const countries = await jsons.countries();
+    return countries.default.find((country: Country) => country.phone_code === phoneCode) ?? null;
+};
 
 type CountryPickerSheetProps = SheetProps & {
     phoneCode: string;
@@ -15,12 +27,13 @@ function CountryPickerSheet(props: CountryPickerSheetProps) {
     const { phoneCode, onSelectCountry, open } = props;
     const theme = useTheme();
     const { control, watch, reset } = useForm({ defaultValues: { search: '' } });
+    const [countries, setCountries] = useState<Country[]>([]);
     const filteredCountries = useMemo(
         () =>
-            COUNTRIES.filter(({ name }) =>
+            countries.filter(({ name }) =>
                 name.toLowerCase().includes(watch('search').toLowerCase()),
             ),
-        [watch('search')],
+        [watch('search'), countries],
     );
 
     const renderItem = useCallback<ListRenderItem<Country>>(
@@ -37,6 +50,13 @@ function CountryPickerSheet(props: CountryPickerSheetProps) {
         ),
         [phoneCode],
     );
+
+    useEffect(() => {
+        (async () => {
+            const fetchedCountries = await jsons.countries();
+            setCountries(fetchedCountries.default);
+        })();
+    }, []);
 
     useEffect(() => {
         if (!open) {

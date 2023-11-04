@@ -1,5 +1,5 @@
 const jsons = {
-    countries: require('./countries.json'),
+    countries: () => import('./countries.json'),
 };
 
 export default jsons;
