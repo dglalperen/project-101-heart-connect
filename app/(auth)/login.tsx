@@ -46,7 +46,7 @@ function LoginScreen() {
             <YStack h="$6" />
             <Button
                 size="$5"
-                bg="$red10"
+                bg="$primary"
                 color="white">
                 Continue
             </Button>
