@@ -4,6 +4,7 @@ import Screen from '@src/components/screen';
 import React, { useState } from 'react';
 import { Button, H1, Input, SizableText, XStack, YStack } from 'tamagui';
 
+
 function LoginScreen() {
     const [phoneCode, setPhoneCode] = useState('+1');
 
