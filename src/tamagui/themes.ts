@@ -53,7 +53,6 @@ const themesBuilder = createThemeBuilder()
             borderColorFocus: 4,
             borderColorPress: 5,
             placeholderColor: -4,
-            primary: -0,
         },
     })
     .addMasks({
