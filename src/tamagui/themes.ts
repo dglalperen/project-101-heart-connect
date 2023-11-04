@@ -1,7 +1,7 @@
 import { createStrengthenMask, createThemeBuilder } from '@tamagui/theme-builder';
 
 const colorPalette_Light = [
-    '#ffffff',
+    '#f3f3f3',
     '#ffeeed',
     '#ffdcdc',
     '#ffcbcb',
@@ -27,7 +27,7 @@ const colorPalette_Dark = [
     '#ad2d3e',
     '#cb364b',
     '#e94057',
-    '#ffffff',
+    '#f3f3f3',
 ];
 
 const themesBuilder = createThemeBuilder()

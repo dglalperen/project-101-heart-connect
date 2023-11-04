@@ -1,7 +1,7 @@
 import fonts from '@src/tamagui/fonts';
 import themes from '@src/tamagui/themes';
+import tokens from '@src/tamagui/tokens';
 import { config } from '@tamagui/config/v2-native';
-import { tokens } from '@tamagui/themes';
 import { createTamagui } from 'tamagui';
 
 const tamaguiConfig = createTamagui({
