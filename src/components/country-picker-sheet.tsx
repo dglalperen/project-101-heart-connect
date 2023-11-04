@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 import InputWrapper from '@src/components/input-wrapper';
 import { COUNTRIES, Country } from '@src/utils/helpers';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { H3, Input, ListItem, Sheet, SheetProps, Stack, YStack, useTheme } from 'tamagui';
 
@@ -12,9 +12,9 @@ type CountryPickerSheetProps = SheetProps & {
 };
 
 function CountryPickerSheet(props: CountryPickerSheetProps) {
-    const { phoneCode, onSelectCountry } = props;
+    const { phoneCode, onSelectCountry, open } = props;
     const theme = useTheme();
-    const { control, watch } = useForm({ defaultValues: { search: '' } });
+    const { control, watch, reset } = useForm({ defaultValues: { search: '' } });
     const filteredCountries = useMemo(
         () =>
             COUNTRIES.filter(({ name }) =>
@@ -38,11 +38,18 @@ function CountryPickerSheet(props: CountryPickerSheetProps) {
         [phoneCode],
     );
 
+    useEffect(() => {
+        if (!open) {
+            reset({ search: '' });
+        }
+    }, [open]);
+
     return (
         <Sheet
             modal
             snapPoints={[90]}
             dismissOnSnapToBottom
+            open={open}
             {...props}>
             <Sheet.Overlay />
             <Sheet.Handle />
