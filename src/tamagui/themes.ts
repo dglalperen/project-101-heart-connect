@@ -15,8 +15,6 @@ const colorPalette_Light = [
     '#000000',
 ];
 
-const colorPalette_Active = ['#e94057', '#fff'];
-
 const colorPalette_Dark = [
     '#000000',
     '#030000',
@@ -36,31 +34,26 @@ const themesBuilder = createThemeBuilder()
     .addPalettes({
         dark: colorPalette_Dark,
         light: colorPalette_Light,
-        active: colorPalette_Active,
     })
     .addTemplates({
         base: {
             background: 0,
-            backgroundHover: 5,
-            backgroundPress: 6,
-            backgroundFocus: 2,
-            backgroundStrong: 4,
-            backgroundTransparent: -0,
+            backgroundHover: 3,
+            backgroundPress: 4,
+            backgroundFocus: 5,
+            backgroundStrong: 1,
+            backgroundTransparent: 0,
             color: -0,
             colorHover: -2,
             colorPress: -1,
             colorFocus: -2,
             colorTransparent: -0,
-            borderColor: -1,
+            borderColor: 5,
             borderColorHover: 6,
             borderColorFocus: 4,
             borderColorPress: 5,
-            placeholderColor: -1,
+            placeholderColor: -4,
             primary: -0,
-        },
-        active: {
-            background: 0,
-            color: 1,
         },
     })
     .addMasks({
@@ -75,12 +68,15 @@ const themesBuilder = createThemeBuilder()
             template: 'base',
             palette: 'dark',
         },
-        active: {
-            template: 'active',
-            palette: 'active',
-        },
     })
     .addChildThemes({
+        active: {
+            mask: 'soften',
+            override: {
+                color: 0,
+                background: -1,
+            },
+        },
         subtle: {
             mask: 'soften',
         },
