@@ -1,7 +1,7 @@
 import { createStrengthenMask, createThemeBuilder } from '@tamagui/theme-builder';
 
 const colorPalette_Light = [
-    '#f3f3f3',
+    '#ffffff',
     '#ffeeed',
     '#ffdcdc',
     '#ffcbcb',
