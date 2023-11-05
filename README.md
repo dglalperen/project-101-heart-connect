@@ -42,6 +42,10 @@ Project-101-Heart-Connect is designed as a stepping stone for budding developers
     utils/
 ```
 
+
+### Design system
+Icon set: MaterialCommunityIcons
+
 ### Sitemap
 
 ```
