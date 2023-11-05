@@ -5,6 +5,10 @@ function HomeLayout() {
     return (
         <Tabs screenOptions={{ headerShown: false }}>
             <Tabs.Screen
+                name="discover"
+                options={{ tabBarLabel: 'Discover' }}
+            />
+            <Tabs.Screen
                 name="matches"
                 options={{ tabBarLabel: 'Matches' }}
             />
