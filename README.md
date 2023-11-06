@@ -4,14 +4,14 @@ Welcome to Project-101-Heart-Connect, a dating app created for learning purposes
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Features](#features)
-- [Contribute](#contribute)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+-   [Overview](#overview)
+-   [Getting Started](#getting-started)
+    -   [Prerequisites](#prerequisites)
+    -   [Installation](#installation)
+-   [Features](#features)
+-   [Contribute](#contribute)
+-   [License](#license)
+-   [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -24,9 +24,9 @@ Project-101-Heart-Connect is designed as a stepping stone for budding developers
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-github-username/project-101-heart-connect.git
-   ```
+    ```bash
+    git clone https://github.com/your-github-username/project-101-heart-connect.git
+    ```
 
 ### Source Directory Structure
 
@@ -42,8 +42,8 @@ Project-101-Heart-Connect is designed as a stepping stone for budding developers
     utils/
 ```
 
-
 ### Design system
+
 Icon set: MaterialCommunityIcons
 
 ### Sitemap
@@ -52,7 +52,7 @@ Icon set: MaterialCommunityIcons
   /
     (app)
          (onboarding)
-                  /complete-profile
+                  /basic-profile
                   /gender
                   /passions
                   /friends
@@ -69,8 +69,8 @@ Icon set: MaterialCommunityIcons
                           /index
                           /photo
           /stories
-          
-        
+
+
     (auth)
          /onboarding
          /login
