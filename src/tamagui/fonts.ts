@@ -23,6 +23,7 @@ const genericFontSizes = {
 const genericLineHeights = {
     1: 21,
     2: 24,
+    3: 27,
     true: 21,
 };
 const headingLineHeights = {
