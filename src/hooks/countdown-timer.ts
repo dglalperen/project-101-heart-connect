@@ -13,7 +13,6 @@ function useCountdownTimer(props?: ICountdownProps) {
     const [seconds, setSeconds] = useState<CountdownTimerSeconds>(
         props?.seconds ?? CountdownTimerSeconds.FiveMinutes,
     );
-
     const secondsToDate = useMemo(() => {
         return new Intl.DateTimeFormat('en-US', {
             minute: '2-digit',

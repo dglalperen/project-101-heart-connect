@@ -1,8 +1,9 @@
+import useOtpClipboard from '@src/hooks/otp-clipboard';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NativeSyntheticEvent, TextInput, TextInputKeyPressEventData } from 'react-native';
 import { Input, XStack, styled } from 'tamagui';
 
-interface IOtpInputs {
+interface IOtpInputProps {
     length?: number;
 }
 
@@ -27,16 +28,25 @@ const OtpTextField = styled(Input, {
     },
 });
 
-function OtpInput(props: IOtpInputs) {
+function OtpInput(props: IOtpInputProps) {
     const [otp, setOtp] = useState<string[]>(new Array(props?.length ?? 4).fill(''));
     const inputs = useRef<TextInput[]>([]);
     const currentInputIndex = useRef<number>();
 
+    useOtpClipboard({
+        pinCount: 4,
+        updateOtpState: otpValue => setOtp(otpValue),
+    });
+
     useEffect(() => {
         if (otp[otp.length - 1] !== '') {
-            alert("You're verified successfully.");
+            verifySuccesfull();
         }
     }, [otp]);
+
+    const verifySuccesfull = useCallback(() => {
+        alert("You're verified succesfuly.");
+    }, []);
 
     const handleOtpChange = (value: string, index: number) => {
         const newOtp = [...otp];
