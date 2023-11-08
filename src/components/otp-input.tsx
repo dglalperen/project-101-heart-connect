@@ -34,7 +34,7 @@ function OtpInput(props: IOtpInputProps) {
     const currentInputIndex = useRef<number>();
 
     useOtpClipboard({
-        pinCount: 4,
+        pinCount: props?.length ?? 4,
         updateOtpState: otpValue => setOtp(otpValue),
     });
 
