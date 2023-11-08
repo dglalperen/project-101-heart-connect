@@ -66,16 +66,20 @@ function SignupScreen() {
                             />
                         </Button>
 
-                        <Button
-                            outlined
-                            w="$size.6"
-                            h="$size.6">
-                            <MaterialCommunityIcons
-                                name="google"
-                                size={28}
-                                color={tamaguiConfig.tokens.color.primary.val}
-                            />
-                        </Button>
+                        <Link
+                            href="/basic-profile"
+                            asChild>
+                            <Button
+                                outlined
+                                w="$size.6"
+                                h="$size.6">
+                                <MaterialCommunityIcons
+                                    name="google"
+                                    size={28}
+                                    color={tamaguiConfig.tokens.color.primary.val}
+                                />
+                            </Button>
+                        </Link>
 
                         <Button
                             outlined
