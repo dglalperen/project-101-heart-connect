@@ -1,8 +1,9 @@
 import Button from '@src/components/button';
+import ImagePickerExample from '@src/components/image-picker';
 import InputWrapper from '@src/components/input-wrapper';
 import Screen from '@src/components/screen';
 import React from 'react';
-import { H1, Input, SizableText, XStack, YStack } from 'tamagui';
+import { H1, Input, SizableText, XStack, YStack, ZStack } from 'tamagui';
 
 function BasicProfileScreen() {
     return (
@@ -14,15 +15,22 @@ function BasicProfileScreen() {
             // justifyContent="center"
             // alignItems="center"
             >
-                <XStack justifyContent="center">
-                    <Button
-                        theme="active"
-                        w="$10"
-                        h="$10">
-                        Choose Photo
-                    </Button>
+                <XStack
+                    justifyContent="center"
+                    alignItems="center">
+                    <ImagePickerExample />
+                    {/* <ZStack flex={1}>
+                    <ImagePickerExample />
+                    <YStack
+                        backgroundColor="$color"
+                        borderRadius="$2"
+                        padding="$2"
+                        y={60}
+                        x={10}
+                    />
+                </ZStack> */}
                 </XStack>
-                <YStack h="$6" />
+                <YStack h="$7" />
                 <YStack>
                     <Input
                         mb="$4"
