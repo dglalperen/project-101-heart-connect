@@ -25,6 +25,8 @@
     "@react-navigation/native": "^6.0.2",
     "@shopify/flash-list": "1.4.3",
     "@tamagui/config": "^1.76.0",
+    "@tamagui/toast": "^1.76.0",
+    "burnt": "^0.12.1",
     "expo": "~49.0.15",
     "expo-clipboard": "~4.3.1",
     "expo-dev-client": "~2.4.11",
@@ -48,7 +50,6 @@
     "react-native-reanimated": "~3.3.0",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
-    "react-native-toast-message": "^2.1.7",
     "react-native-web": "~0.19.6",
     "tamagui": "^1.76.0"
   },

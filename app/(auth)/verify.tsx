@@ -20,7 +20,6 @@ function VerifyScreen() {
                 lineHeight="$3">
                 Type the verification code we’ve sent you
             </Paragraph>
-
             <OtpInput length={4} />
 
             <Button isText>Send again</Button>

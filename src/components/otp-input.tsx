@@ -1,4 +1,5 @@
 import useOtpClipboard from '@src/hooks/otp-clipboard';
+import { useToastController } from '@tamagui/toast';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NativeSyntheticEvent, TextInput, TextInputKeyPressEventData } from 'react-native';
 import { Input, XStack, styled } from 'tamagui';
@@ -32,6 +33,7 @@ function OtpInput(props: IOtpInputProps) {
     const [otp, setOtp] = useState<string[]>(new Array(props?.length ?? 4).fill(''));
     const inputs = useRef<TextInput[]>([]);
     const currentInputIndex = useRef<number>();
+    const toast = useToastController();
 
     useOtpClipboard({
         pinCount: props?.length ?? 4,
@@ -45,7 +47,9 @@ function OtpInput(props: IOtpInputProps) {
     }, [otp]);
 
     const verifySuccesfull = useCallback(() => {
-        alert("You're verified succesfuly.");
+        toast.show("You're verified succesfuly.", {
+            toastType: 'success',
+        });
     }, []);
 
     const handleOtpChange = (value: string, index: number) => {
