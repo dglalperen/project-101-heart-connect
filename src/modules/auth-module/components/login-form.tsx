@@ -115,7 +115,7 @@ function LoginForm() {
             <YStack h="$3" />
             <Button
                 size="$5"
-                disabled
+                disabled={!isValid}
                 theme="active"
                 color="white"
                 onPress={handleSubmit(() => {})}>
