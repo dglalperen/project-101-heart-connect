@@ -3,10 +3,19 @@ import { DatePicker } from '@src/components/date-picker';
 import ImagePickerExample from '@src/components/image-picker';
 import InputWrapper from '@src/components/input-wrapper';
 import Screen from '@src/components/screen';
-import React from 'react';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
 import { H1, Input, SizableText, XStack, YStack, ZStack } from 'tamagui';
 
 function BasicProfileScreen() {
+    const router = useRouter();
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+
+    const onConfirm = () => {
+        router.push('/gender');
+    };
+
     return (
         <Screen mx="$7">
             <YStack h="$10" />
@@ -37,20 +46,24 @@ function BasicProfileScreen() {
                         mb="$4"
                         height="$5"
                         placeholder="First Name"
+                        defaultValue={firstName}
+                        onChangeText={newText => setFirstName(newText)}
                     />
                     <Input
                         mb="$4"
                         height="$5"
                         placeholder="Last Name"
+                        defaultValue={lastName}
+                        onChangeText={newText => setLastName(newText)}
                     />
 
                     <DatePicker />
                 </YStack>
-
                 <YStack h="$12" />
 
                 <Button
                     theme="active"
+                    onPress={onConfirm}
                     h="$5">
                     Confirm
                 </Button>

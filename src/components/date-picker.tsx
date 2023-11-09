@@ -5,12 +5,14 @@ import { H5, Sheet, SizableText, XStack, YStack } from 'tamagui';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const DatePicker = () => {
-    const [date, setDate] = useState(new Date(1598051730000));
+    const [date, setDate] = useState<Date>(new Date());
+    const [displayDate, setDisplayDate] = useState<string | null>();
     const [show, setShow] = useState(false);
 
-    const onChange = (event: any, selectedDate: any) => {
+    const onChange = (_event: any, selectedDate: any) => {
         const currentDate = selectedDate;
         setDate(currentDate);
+        setDisplayDate(currentDate.toISOString().slice(0, 10).replace(/-/g, ' - '));
     };
 
     const showDatepicker = () => {
@@ -26,7 +28,7 @@ export const DatePicker = () => {
             <Button
                 theme="active"
                 h="$5"
-                opacity={0.1}
+                // opacity={0.1}
                 onPress={showDatepicker}>
                 <XStack
                     alignItems="center"
@@ -38,11 +40,10 @@ export const DatePicker = () => {
                     <H5
                         color="white"
                         fontWeight="bold"
-                        fontSize={13}>
-                        Choose birthday day
+                        fontSize={14}>
+                        {displayDate ? displayDate : 'Choose birthday day'}
                     </H5>
                 </XStack>
-                {/* {date ? date.getDate.toString : 'Choose birthday day'} */}
             </Button>
 
             <Sheet
@@ -64,6 +65,7 @@ export const DatePicker = () => {
                             mode="date"
                             display="inline"
                             onChange={onChange}
+                            maximumDate={new Date()}
                         />
 
                         <Button
