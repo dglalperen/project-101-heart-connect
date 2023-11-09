@@ -1,4 +1,5 @@
 import Button from '@src/components/button';
+import { DatePicker } from '@src/components/date-picker';
 import ImagePickerExample from '@src/components/image-picker';
 import InputWrapper from '@src/components/input-wrapper';
 import Screen from '@src/components/screen';
@@ -43,11 +44,7 @@ function BasicProfileScreen() {
                         placeholder="Last Name"
                     />
 
-                    <Button
-                        theme="active"
-                        h="$5">
-                        Choose birthday date
-                    </Button>
+                    <DatePicker />
                 </YStack>
 
                 <YStack h="$12" />

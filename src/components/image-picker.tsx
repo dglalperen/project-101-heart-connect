@@ -30,9 +30,18 @@ export default function ImagePickerExample() {
                 h="$10"
                 borderRadius={20}
                 onPress={pickImage}>
-                {image && (
+                {image ? (
                     <Image
                         source={{ uri: image }}
+                        width="$10"
+                        height="$10"
+                        borderRadius={20}
+                    />
+                ) : (
+                    <Image
+                        source={{
+                            uri: 'https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg',
+                        }}
                         width="$10"
                         height="$10"
                         borderRadius={20}
