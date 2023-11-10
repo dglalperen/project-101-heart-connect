@@ -2,43 +2,55 @@ import Button from '@src/components/button';
 import { DatePicker } from '@src/components/date-picker';
 import ImagePickerExample from '@src/components/image-picker';
 import Screen from '@src/components/screen';
-import { subYears } from '@src/utils/utilities';
+import { validateProfileData } from '@src/utils/validation-schemas';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { H1, H2, Input, XStack, YStack } from 'tamagui';
+import { H2, Input, XStack, YStack, Text } from 'tamagui';
+import { ZodIssue } from 'zod';
 
 function BasicProfileScreen() {
     const router = useRouter();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
     const [confirmDisabled, setConfirmDisabled] = useState(true);
-    const [date, setDate] = useState<Date | undefined>();
 
-    useEffect(() => {
-        if (!date) {
-            return;
-        }
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        dateOfBirth: undefined,
+        photo: '',
+    });
 
-        const newDate = new Date();
-        const ageLimitDate = subYears(newDate, 18);
+    const [errors, setErrors] = useState<ZodIssue[] | null>(null);
 
-        if (firstName !== '' && lastName !== '' && ageLimitDate >= date) {
-            setConfirmDisabled(false);
-        } else if (firstName === '' || lastName === '' || ageLimitDate < date) {
-            // add toast to notify user that first name or last name is empty
-            // add toast if the user is not 18 years old based on the date entered
-            setConfirmDisabled(true);
-        }
-    }, [firstName, lastName, date]);
-
-
-    const onConfirm = () => {
-        router.push('/gender');
+    const handleInputChange = (field: any, value: any) => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [field]: value,
+        }));
     };
 
-    // Callback function to get the selected date from date-picker
-    const getDate = (date: Date) => {
-        setDate(date);
+    const handleDateChange = (date: any) => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            dateOfBirth: date,
+        }));
+    };
+
+    useEffect(() => {
+        const validationErrors = validateProfileData(formData);
+        setErrors(validationErrors);
+
+        setConfirmDisabled(!!validationErrors);
+    }, [formData]);
+
+    const onConfirm = () => {
+        const validationErrors = validateProfileData(formData);
+
+        if (!validationErrors) {
+            router.push('/gender');
+        } else {
+            setErrors(validationErrors);
+            // Handle validation errors (e.g., show a toast or alert)
+        }
     };
 
     return (
@@ -51,26 +63,43 @@ function BasicProfileScreen() {
                     justifyContent="center"
                     alignItems="center"
                     mb="$10">
-                    <ImagePickerExample />
+                    <ImagePickerExample
+                        onImageSelected={photo => handleInputChange('photo', photo)}
+                    />
                 </XStack>
-                <YStack mb="$14">
+                <YStack mb="$3">
                     <Input
                         mb="$4"
                         height="$5"
                         placeholder="First Name"
-                        defaultValue={firstName}
-                        onChangeText={newText => setFirstName(newText)}
+                        defaultValue={formData.firstName}
+                        onChangeText={newText => handleInputChange('firstName', newText)}
                     />
                     <Input
                         mb="$4"
                         height="$5"
                         placeholder="Last Name"
-                        defaultValue={lastName}
-                        onChangeText={newText => setLastName(newText)}
+                        defaultValue={formData.lastName}
+                        onChangeText={newText => handleInputChange('lastName', newText)}
                     />
-
-                    <DatePicker getDate={getDate} />
+                    <DatePicker getDate={handleDateChange} />
+                    <YStack
+                        pt="$2"
+                        height="$12">
+                        {errors && (
+                            <>
+                                {errors.map((error, index) => (
+                                    <Text
+                                        key={index}
+                                        color="red">
+                                        {error.message}
+                                    </Text>
+                                ))}
+                            </>
+                        )}
+                    </YStack>
                 </YStack>
+
                 <Button
                     theme="active"
                     onPress={onConfirm}

@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 import { Image, XStack, YStack } from 'tamagui';
 
 type Props = {
-    getImage?: (image: string) => void;
+    onImageSelected?: (image: string) => void;
 };
 
-export default function ImagePicker({ getImage }: Props) {
+export default function ImagePicker({ onImageSelected }: Props) {
     const [image, setImage] = useState<string | undefined>();
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -20,8 +20,8 @@ export default function ImagePicker({ getImage }: Props) {
         });
 
         if (!result.canceled) {
-            if (getImage) {
-                getImage(result.assets[0].uri);
+            if (onImageSelected) {
+                onImageSelected(result.assets[0].uri);
             }
             setImage(result.assets[0].uri);
         }
