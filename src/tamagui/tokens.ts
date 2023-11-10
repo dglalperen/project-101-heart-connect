@@ -11,6 +11,9 @@ const customToken = createTokens({
         textSecondary: '#323755',
         primary: '#E94057',
         secondary: 'rgba(233,64,87,.17)',
+        border: '#E8E6EA',
+        placeholder: '#E8E6EA',
+        backdrop: 'rgba(0,0,0,.5)',
     },
 });
 

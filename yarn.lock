@@ -3305,6 +3305,23 @@
   resolved "https://registry.yarnpkg.com/@tamagui/timer/-/timer-1.76.0.tgz#e1578339c2533d60d6acda678d5f4abb3785fc46"
   integrity sha512-p/XhpshWf4wLupGbtlga8amgPfIMfXuJkpFBoLDGJSy90gNi0zarcLMinUWKDwvFP2w/Fmvil8CCSCN9R1x8mg==
 
+"@tamagui/toast@^1.76.0":
+  version "1.76.0"
+  resolved "https://registry.yarnpkg.com/@tamagui/toast/-/toast-1.76.0.tgz#4f20478fda81cf1199d690139f2be8f5581c86eb"
+  integrity sha512-rQiN/kXXvm70bKnirYdsvi8sBQrM4w8qYkfH7SqmSblPnrNZePvQHpwv1EphF/C+OtGC5Huf0rLxj64pkAL4Fw==
+  dependencies:
+    "@tamagui/animate-presence" "1.76.0"
+    "@tamagui/compose-refs" "1.76.0"
+    "@tamagui/core" "1.76.0"
+    "@tamagui/create-context" "1.76.0"
+    "@tamagui/dismissable" "1.76.0"
+    "@tamagui/polyfill-dev" "1.76.0"
+    "@tamagui/portal" "1.76.0"
+    "@tamagui/stacks" "1.76.0"
+    "@tamagui/text" "1.76.0"
+    "@tamagui/use-controllable-state" "1.76.0"
+    "@tamagui/visually-hidden" "1.76.0"
+
 "@tamagui/toggle-group@1.76.0":
   version "1.76.0"
   resolved "https://registry.yarnpkg.com/@tamagui/toggle-group/-/toggle-group-1.76.0.tgz#5f9319ab2762234de0da403e39589809b37bdf3b"
@@ -3484,6 +3501,11 @@
   integrity sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==
   dependencies:
     "@types/node" "*"
+
+"@types/google-libphonenumber@^7.4.30":
+  version "7.4.30"
+  resolved "https://registry.yarnpkg.com/@types/google-libphonenumber/-/google-libphonenumber-7.4.30.tgz#a47ed8f1f237bd43edbd1c8aff24400b0fd9b2fe"
+  integrity sha512-Td1X1ayRxePEm6/jPHUBs2tT6TzW1lrVB6ZX7ViPGellyzO/0xMNi+wx5nH6jEitjznq276VGIqjK5qAju0XVw==
 
 "@types/graceful-fs@^4.1.3":
   version "4.1.8"
@@ -4401,6 +4423,14 @@ bundle-name@^3.0.0:
   integrity sha512-PKA4BeSvBpQKQ8iPOGCSiell+N8P+Tf1DlwqmYhpe2gAhKPHn8EYOxVT+ShuGmhg8lN8XiSlS80yiExKXrURlw==
   dependencies:
     run-applescript "^5.0.0"
+
+burnt@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/burnt/-/burnt-0.12.1.tgz#48d9db0115dc9016ba0420db2b68c943bcbe84c8"
+  integrity sha512-a5EQvG8CR1JDmOyY9aiUORnJ39wpmZMMva5qbCTXadtNJAjLDZTvrmp7cvYB9i+Jfe1wVhvCCFfEios7M9/88Q==
+  dependencies:
+    sf-symbols-typescript "^1.0.0"
+    sonner "^0.3.5"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -5669,6 +5699,11 @@ expo-asset@~8.10.1:
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
 
+expo-clipboard@~4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/expo-clipboard/-/expo-clipboard-4.3.1.tgz#ce6ed35ae31c7fc1aeadb005b8eb9b39a8bb9b40"
+  integrity sha512-WIsjvAsr2+/NZRa84mKxjui1EdPpdKbQIC2LN/KMBNuT7g4GQYL3oo9WO9G/C7doKQ7f7pnfdvO3N6fUnoRoJw==
+
 expo-constants@~14.4.2:
   version "14.4.2"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-14.4.2.tgz#cac5e8b524069545739b8d8595ce96cc5be6578c"
@@ -6397,6 +6432,11 @@ globby@^11.0.1, globby@^11.1.0:
     ignore "^5.2.0"
     merge2 "^1.4.1"
     slash "^3.0.0"
+
+google-libphonenumber@^3.2.33:
+  version "3.2.33"
+  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.2.33.tgz#948b877914eb7f35fc6d311220472bf9bd6b27d4"
+  integrity sha512-1QKCvAlfq8zY1mviORI9lDzM3I/hwm9+h0CwYBTLq59DBbSHMd5zBOLqHZFiBLicRpwIz46Nynvbywj1XApKvA==
 
 gopd@^1.0.1:
   version "1.0.1"
@@ -7539,7 +7579,7 @@ jimp-compact@0.16.1:
   resolved "https://registry.yarnpkg.com/jimp-compact/-/jimp-compact-0.16.1.tgz#9582aea06548a2c1e04dd148d7c3ab92075aefa3"
   integrity sha512-dZ6Ra7u1G8c4Letq/B5EzAxj4tLFHL+cGtdpR+PVm4yzPDj+lCk+AbivWt1eOM+ikzkowtyV7qSqX6qr3t71Ww==
 
-joi@^17.11.0, joi@^17.2.1:
+joi@^17.2.1:
   version "17.11.0"
   resolved "https://registry.yarnpkg.com/joi/-/joi-17.11.0.tgz#aa9da753578ec7720e6f0ca2c7046996ed04fc1a"
   integrity sha512-NgB+lZLNoqISVy1rZocE9PZI36bL/77ie924Ri43yEvi9GUUMPeyVIr8KdFTMUlby1p0PBYMk9spIxEUQYqrJQ==
@@ -9306,11 +9346,6 @@ react-native-screens@~3.22.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-toast-message@^2.1.7:
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-2.1.7.tgz#480ead6ea23e884f50ba467c818337d6830341e5"
-  integrity sha512-5zX3T5buVpg4bn9KZYVZ2VUQiLQZ1FHSM2AFQHVpgeKMYb+Gq+jt7wjhfPqhuMkJElQr7XNrnRw/rBCdD+7Q9w==
-
 react-native-web-internals@1.76.0:
   version "1.76.0"
   resolved "https://registry.yarnpkg.com/react-native-web-internals/-/react-native-web-internals-1.76.0.tgz#ba94e0e3250ba534e1bf849c69da9393b7745f1a"
@@ -9918,6 +9953,11 @@ setprototypeof@1.2.0:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.2.0.tgz#66c9a24a73f9fc28cbe66b09fed3d33dcaf1b424"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
+sf-symbols-typescript@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/sf-symbols-typescript/-/sf-symbols-typescript-1.0.0.tgz#94e9210bf27e7583f9749a0d07bd4f4937ea488f"
+  integrity sha512-DkS7q3nN68dEMb4E18HFPDAvyrjDZK9YAQQF2QxeFu9gp2xRDXFMF8qLJ1EmQ/qeEGQmop4lmMM1WtYJTIcCMw==
+
 shallow-clone@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/shallow-clone/-/shallow-clone-3.0.1.tgz#8f2981ad92531f55035b01fb230769a40e02efa3"
@@ -10017,6 +10057,11 @@ slugify@^1.3.4:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.6.6.tgz#2d4ac0eacb47add6af9e04d3be79319cbcc7924b"
   integrity sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==
+
+sonner@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-0.3.5.tgz#5ef175732cb7b637c6460620ab01a0fba0e6a36b"
+  integrity sha512-yIwaQ4dftMvFApuruto2t7wGyyaPRpj5qYBWYJIz4Z7uGcVn0IfqI/hWN0JyJN4izNbZFuCYZISf3fOGnvSlNQ==
 
 sort-keys@^2.0.0:
   version "2.0.0"
@@ -11283,6 +11328,11 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zod@^3.22.4:
+  version "3.22.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
+  integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
 
 zustand@^4.3.8:
   version "4.4.6"
