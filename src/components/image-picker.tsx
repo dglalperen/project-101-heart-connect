@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Image, XStack, YStack } from 'tamagui';
 
 type Props = {
-    onImageSelected?: (image: string) => void;
+    onImageSelected: (image: string) => void;
 };
 
 export default function ImagePicker({ onImageSelected }: Props) {
@@ -20,9 +20,7 @@ export default function ImagePicker({ onImageSelected }: Props) {
         });
 
         if (!result.canceled) {
-            if (onImageSelected) {
-                onImageSelected(result.assets[0].uri);
-            }
+            onImageSelected(result.assets[0].uri);
             setImage(result.assets[0].uri);
         }
     };

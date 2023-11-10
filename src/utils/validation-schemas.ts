@@ -1,6 +1,13 @@
-import { ZodError, ZodIssue, z } from 'zod';
+import { ZodError, z } from 'zod';
 
 import { isAtleast18YearsOld } from './utilities';
+
+interface profileData {
+    firstName: string;
+    lastName: string;
+    dateOfBirth: Date | undefined;
+    photo: string;
+}
 
 export const profileValidationSchema = z.object({
     firstName: z.string().min(1, { message: 'First Name required' }).max(255),
@@ -15,7 +22,7 @@ export const profileValidationSchema = z.object({
     photo: z.string().min(1, { message: 'Please choose a photo' }),
 });
 
-export const validateProfileData = (data: any) => {
+export const validateProfileData = (data: profileData) => {
     try {
         profileValidationSchema.parse(data);
         return null;

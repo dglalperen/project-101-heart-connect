@@ -21,7 +21,7 @@ function BasicProfileScreen() {
 
     const [errors, setErrors] = useState<ZodIssue[] | null>(null);
 
-    const handleInputChange = (field: any, value: any) => {
+    const handleInputChange = (field: keyof typeof formData, value: string | Date) => {
         setFormData(prevFormData => ({
             ...prevFormData,
             [field]: value,
