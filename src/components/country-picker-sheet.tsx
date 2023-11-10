@@ -1,10 +1,12 @@
 import jsons from '@assets/jsons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
+import BaseInput from '@src/components/base-input';
 import InputWrapper from '@src/components/input-wrapper';
+import customToken from '@src/tamagui/tokens';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { H3, Input, ListItem, Sheet, SheetProps, Stack, YStack, useTheme } from 'tamagui';
+import { H3, ListItem, Sheet, SheetProps, Stack, YStack, useTheme } from 'tamagui';
 
 export type Country = {
     iso: string;
@@ -45,7 +47,7 @@ function CountryPickerSheet(props: CountryPickerSheetProps) {
                 onPress={() => {
                     onSelectCountry(item);
                 }}
-                bg={phoneCode === item.phone_code ? '$backgroundFocus' : '$background'}
+                bg={phoneCode === item.phone_code ? '$backgroundHover' : '$background'}
             />
         ),
         [phoneCode],
@@ -71,7 +73,7 @@ function CountryPickerSheet(props: CountryPickerSheetProps) {
             dismissOnSnapToBottom
             open={open}
             {...props}>
-            <Sheet.Overlay />
+            <Sheet.Overlay bg="$backdrop" />
             <Sheet.Handle />
             <Sheet.Frame>
                 <Stack m="$3">
@@ -83,20 +85,19 @@ function CountryPickerSheet(props: CountryPickerSheetProps) {
                                 leftElement={
                                     <YStack px="$3">
                                         <MaterialCommunityIcons
-                                            size={16}
+                                            size={20}
                                             name="magnify"
-                                            color={theme.placeholderColor.val}
+                                            color={customToken.color.textPrimary40.val}
                                         />
                                     </YStack>
                                 }>
                                 {({ leftElementWidth }) => (
-                                    <Input
+                                    <BaseInput
                                         placeholder="Search Country"
                                         onChangeText={field.onChange}
                                         autoCapitalize="none"
                                         returnKeyLabel="Search"
                                         returnKeyType="search"
-                                        size="$5"
                                         f={1}
                                         pl={leftElementWidth}
                                         {...field}

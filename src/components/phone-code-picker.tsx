@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CountryPickerSheet, { Country, fetchCountry } from '@src/components/country-picker-sheet';
+import customToken from '@src/tamagui/tokens';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { XStack, SizableText, Button, useTheme } from 'tamagui';
 
@@ -46,11 +47,13 @@ function PhoneCodePicker(props: PhoneCodePickerProps) {
                 mx={3}
                 onPress={openSheet}>
                 <XStack ai="center">
-                    <SizableText textAlign="center">({selectedCountry?.phone_code})</SizableText>
+                    <SizableText textAlign="center">
+                        {selectedCountry?.flag} ({selectedCountry?.phone_code})
+                    </SizableText>
                     <MaterialCommunityIcons
                         size={24}
                         name="chevron-down"
-                        color={theme.placeholderColor.val}
+                        color={customToken.color.textPrimary40.val}
                     />
                 </XStack>
             </Button>
