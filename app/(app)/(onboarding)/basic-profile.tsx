@@ -1,47 +1,65 @@
 import Button from '@src/components/button';
 import { DatePicker } from '@src/components/date-picker';
 import ImagePickerExample from '@src/components/image-picker';
-import InputWrapper from '@src/components/input-wrapper';
 import Screen from '@src/components/screen';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { H1, Input, SizableText, XStack, YStack, ZStack } from 'tamagui';
+import React, { useEffect, useState } from 'react';
+import { H1, H2, Input, XStack, YStack } from 'tamagui';
 
 function BasicProfileScreen() {
     const router = useRouter();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [confirmDisabled, setConfirmDisabled] = useState(true);
+    const [date, setDate] = useState<Date | undefined>();
+
+    useEffect(() => {
+        if (!date) {
+            return;
+        }
+
+        const newDate = new Date();
+        const ageLimitDate = subYears(newDate, 18);
+
+        if (firstName !== '' && lastName !== '' && ageLimitDate >= date) {
+            setConfirmDisabled(false);
+        } else if (firstName === '' || lastName === '' || ageLimitDate < date) {
+            // add toast to notify user that first name or last name is empty
+            // add toast if the user is not 18 years old based on the date entered
+            setConfirmDisabled(true);
+        }
+    }, [firstName, lastName, date]);
+
+    // Helper function to subtract years from Date
+    // Can be moved to a separate helper file or something
+    const subYears = (date: Date, years: number) => {
+        const dateCopy = new Date(date);
+        dateCopy.setFullYear(dateCopy.getFullYear() - years);
+        return dateCopy;
+    };
 
     const onConfirm = () => {
         router.push('/gender');
     };
 
+    // Callback function to get the selected date from date-picker
+    const getDate = (date: Date) => {
+        setDate(date);
+    };
+
     return (
         <Screen mx="$7">
             <YStack h="$10" />
-            <H1>Profile Details</H1>
+            <H2>Profile Details</H2>
             <YStack h="$10" />
-            <YStack
-            // justifyContent="center"
-            // alignItems="center"
-            >
+            <YStack>
                 <XStack
                     justifyContent="center"
-                    alignItems="center">
+                    alignItems="center"
+                    mb="$10">
                     <ImagePickerExample />
-                    {/* <ZStack flex={1}>
-                    <ImagePickerExample />
-                    <YStack
-                        backgroundColor="$color"
-                        borderRadius="$2"
-                        padding="$2"
-                        y={60}
-                        x={10}
-                    />
-                </ZStack> */}
                 </XStack>
-                <YStack h="$7" />
-                <YStack>
+                <YStack mb="$14">
                     <Input
                         mb="$4"
                         height="$5"
@@ -57,14 +75,14 @@ function BasicProfileScreen() {
                         onChangeText={newText => setLastName(newText)}
                     />
 
-                    <DatePicker />
+                    <DatePicker getDate={getDate} />
                 </YStack>
-                <YStack h="$12" />
-
                 <Button
                     theme="active"
                     onPress={onConfirm}
-                    h="$5">
+                    h="$5"
+                    disabled={confirmDisabled}
+                    opacity={confirmDisabled ? 0.5 : 1}>
                     Confirm
                 </Button>
             </YStack>

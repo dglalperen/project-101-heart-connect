@@ -1,10 +1,16 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '@src/components/button';
-import { SetStateAction, useState } from 'react';
-import { H5, Sheet, SizableText, XStack, YStack } from 'tamagui';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import tamaguiConfig from '@src/tamagui';
+import { useState } from 'react';
+import { Platform } from 'react-native';
+import { H5, Sheet, YStack, Text } from 'tamagui';
 
-export const DatePicker = () => {
+type Props = {
+    getDate: (date: Date) => void;
+};
+
+export const DatePicker = ({ getDate }: Props) => {
     const [date, setDate] = useState<Date>(new Date());
     const [displayDate, setDisplayDate] = useState<string | null>();
     const [show, setShow] = useState(false);
@@ -21,31 +27,29 @@ export const DatePicker = () => {
 
     const closeDatePicker = () => {
         setShow(false);
+        getDate(date);
     };
 
     return (
         <>
             <Button
-                theme="active"
+                secondary
                 h="$5"
-                // opacity={0.1}
-                onPress={showDatepicker}>
-                <XStack
-                    alignItems="center"
-                    flex={1}>
+                icon={
                     <MaterialCommunityIcons
                         size={27}
                         name="calendar"
                     />
-                    <H5
-                        color="white"
-                        fontWeight="bold"
-                        fontSize={14}>
-                        {displayDate ? displayDate : 'Choose birthday day'}
-                    </H5>
-                </XStack>
+                }
+                onPress={showDatepicker}>
+                <Text
+                    color={tamaguiConfig.tokens.color.primary.val}
+                    fontWeight="bold"
+                    fontSize={14}>
+                    {displayDate ? displayDate : 'Choose birthday day'}
+                </Text>
             </Button>
-
+            {/* {show && Platform.OS === 'android' && ( */}
             <Sheet
                 modal
                 open={show}
@@ -78,6 +82,7 @@ export const DatePicker = () => {
                     </YStack>
                 </Sheet.Frame>
             </Sheet>
+            {/* )} */}
         </>
     );
 };

@@ -13,6 +13,12 @@ const Button = styled(TButton, {
                 color: '$primary',
             },
         },
+        secondary: {
+            true: {
+                color: '$primary',
+                backgroundColor: '$secondary',
+            },
+        },
     } as const,
     borderRadius: '$radius.6',
 });
