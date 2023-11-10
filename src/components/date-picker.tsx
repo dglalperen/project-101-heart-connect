@@ -3,8 +3,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '@src/components/button';
 import tamaguiConfig from '@src/tamagui';
 import { useState } from 'react';
-import { Platform } from 'react-native';
 import { H5, Sheet, YStack, Text } from 'tamagui';
+
+const DEFAULT_DISPLAY_STRING = 'Choose birthday day';
 
 type Props = {
     getDate: (date: Date) => void;
@@ -14,6 +15,7 @@ export const DatePicker = ({ getDate }: Props) => {
     const [date, setDate] = useState<Date>(new Date());
     const [displayDate, setDisplayDate] = useState<string | null>();
     const [show, setShow] = useState(false);
+
 
     const onChange = (_event: any, selectedDate: any) => {
         const currentDate = selectedDate;
@@ -33,7 +35,7 @@ export const DatePicker = ({ getDate }: Props) => {
     return (
         <>
             <Button
-                secondary
+                isSecondary
                 h="$5"
                 icon={
                     <MaterialCommunityIcons
@@ -43,13 +45,11 @@ export const DatePicker = ({ getDate }: Props) => {
                 }
                 onPress={showDatepicker}>
                 <Text
-                    color={tamaguiConfig.tokens.color.primary.val}
-                    fontWeight="bold"
-                    fontSize={14}>
-                    {displayDate ? displayDate : 'Choose birthday day'}
+                    color="$primary"
+                    fontWeight="bold">
+                    {displayDate ? displayDate : DEFAULT_DISPLAY_STRING}
                 </Text>
             </Button>
-            {/* {show && Platform.OS === 'android' && ( */}
             <Sheet
                 modal
                 open={show}
@@ -82,7 +82,6 @@ export const DatePicker = ({ getDate }: Props) => {
                     </YStack>
                 </Sheet.Frame>
             </Sheet>
-            {/* )} */}
         </>
     );
 };

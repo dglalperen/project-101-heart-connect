@@ -13,7 +13,7 @@ const Button = styled(TButton, {
                 color: '$primary',
             },
         },
-        secondary: {
+        isSecondary: {
             true: {
                 color: '$primary',
                 backgroundColor: '$secondary',

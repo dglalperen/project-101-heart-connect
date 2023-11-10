@@ -2,6 +2,7 @@ import Button from '@src/components/button';
 import { DatePicker } from '@src/components/date-picker';
 import ImagePickerExample from '@src/components/image-picker';
 import Screen from '@src/components/screen';
+import { subYears } from '@src/utils/utilities';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { H1, H2, Input, XStack, YStack } from 'tamagui';
@@ -30,13 +31,6 @@ function BasicProfileScreen() {
         }
     }, [firstName, lastName, date]);
 
-    // Helper function to subtract years from Date
-    // Can be moved to a separate helper file or something
-    const subYears = (date: Date, years: number) => {
-        const dateCopy = new Date(date);
-        dateCopy.setFullYear(dateCopy.getFullYear() - years);
-        return dateCopy;
-    };
 
     const onConfirm = () => {
         router.push('/gender');

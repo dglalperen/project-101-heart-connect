@@ -1,25 +1,28 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Button from '@src/components/button';
-import tamaguiConfig from '@src/tamagui';
-import * as ImagePicker from 'expo-image-picker';
+import { PROFILE_PLACEHOLDER } from '@src/utils/constants';
+import * as ExpoImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Image, XStack, YStack } from 'tamagui';
 
-export default function ImagePickerExample() {
-    const [image, setImage] = useState<string | null>(null);
+type Props = {
+    getImage?: (image: string) => void;
+};
 
+export default function ImagePicker({ getImage }: Props) {
+    const [image, setImage] = useState<string | undefined>();
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+        const result = await ExpoImagePicker.launchImageLibraryAsync({
+            mediaTypes: ExpoImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.canceled) {
+            if (getImage) {
+                getImage(result.assets[0].uri);
+            }
             setImage(result.assets[0].uri);
         }
     };
@@ -29,9 +32,7 @@ export default function ImagePickerExample() {
             <XStack>
                 <Image
                     source={{
-                        uri: image
-                            ? image
-                            : 'https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352010-stock-illustration-default-placeholder-man-and-woman.jpg',
+                        uri: image ? image : PROFILE_PLACEHOLDER,
                     }}
                     width="$10"
                     height="$10"
@@ -39,7 +40,7 @@ export default function ImagePickerExample() {
                     onPress={pickImage}
                 />
                 <YStack
-                    backgroundColor={tamaguiConfig.tokens.color.primary.val}
+                    backgroundColor="$primary"
                     h="$4"
                     w="$4"
                     borderRadius="$10"
