@@ -1,13 +1,28 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import auth from '@react-native-firebase/auth';
 import Button from '@src/components/button';
 import DividerWithText from '@src/components/divider';
 import Screen from '@src/components/screen';
+import useSession from '@src/hooks/session';
 import tamaguiConfig from '@src/tamagui';
 import Assets from '@src/theme/assets';
 import { Link } from 'expo-router';
-import { H5, Image, XStack, YStack } from 'tamagui';
+import { useCallback } from 'react';
+import { H5, Image, SizableText, XStack, YStack } from 'tamagui';
 
 function SignupScreen() {
+    const { currentUser, isLoggedIn } = useSession();
+    const onPressContinueEmail = useCallback(() => {
+        if (isLoggedIn) {
+            console.warn('sIGNOUT');
+            auth().signOut();
+
+            return;
+        }
+
+        auth().signInWithEmailAndPassword('admin@admin.com', 'admin123');
+    }, [isLoggedIn]);
+
     return (
         <Screen
             justifyContent="center"
@@ -20,6 +35,9 @@ function SignupScreen() {
                 mb="$10"
             />
 
+            <SizableText>{currentUser?.email}</SizableText>
+            <SizableText>{isLoggedIn.toString()}</SizableText>
+
             <H5
                 fontWeight="bold"
                 mb="$5">
@@ -28,16 +46,13 @@ function SignupScreen() {
 
             <YStack>
                 <YStack space>
-                    <Link
-                        asChild
-                        href="/onboarding">
-                        <Button
-                            theme="active"
-                            width="$20"
-                            height="$4.5">
-                            Continue with email
-                        </Button>
-                    </Link>
+                    <Button
+                        theme="active"
+                        width="$20"
+                        onPress={onPressContinueEmail}
+                        height="$4.5">
+                        Continue with email
+                    </Button>
 
                     <Link
                         href="/onboarding"
