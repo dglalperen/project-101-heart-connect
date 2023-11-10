@@ -28,15 +28,19 @@ function SignupScreen() {
 
             <YStack>
                 <YStack space>
-                    <Button
-                        theme="active"
-                        width="$20"
-                        height="$4.5">
-                        Continue with email
-                    </Button>
+                    <Link
+                        asChild
+                        href="/onboarding">
+                        <Button
+                            theme="active"
+                            width="$20"
+                            height="$4.5">
+                            Continue with email
+                        </Button>
+                    </Link>
 
                     <Link
-                        href="/login"
+                        href="/onboarding"
                         asChild>
                         <Button
                             outlined
