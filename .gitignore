@@ -47,3 +47,8 @@ expo-env.d.ts
 
 # Editor
 .vscode
+
+# Firebase
+
+src/firebase/google-services.json
+src/firebase/GoogleService-Info.plist

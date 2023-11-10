@@ -1,9 +1,19 @@
 import Screen from '@src/components/screen';
 import LoginForm from '@src/modules/auth-module/components/login-form';
-import React from 'react';
+import { useNavigation } from 'expo-router';
+import React, { useLayoutEffect } from 'react';
 import { H1, SizableText, YStack } from 'tamagui';
 
 function LoginScreen() {
+    const navigation = useNavigation();
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            // headerRight: () => <SizableText>selam</SizableText>,
+            title: 'Selam',
+        });
+    }, []);
+
     return (
         <Screen mx="$7">
             <YStack h="$10" />
