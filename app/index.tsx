@@ -3,9 +3,6 @@ import { Redirect } from 'expo-router';
 import React from 'react';
 
 function RootScreen() {
-<<<<<<< HEAD
-    return <Redirect href="/signup" />;
-=======
     const { isLoggedIn } = useSession();
 
     if (!isLoggedIn) {
@@ -13,7 +10,6 @@ function RootScreen() {
     }
 
     return <Redirect href="/login" />;
->>>>>>> origin
 }
 
 export default RootScreen;
