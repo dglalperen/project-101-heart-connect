@@ -1,3 +1,5 @@
+import AppBar from '@src/components/app/appbar';
+import useSession from '@src/hooks/session';
 import useFontsLoader from '@src/hooks/use-fonts-loader';
 import Providers from '@src/providers';
 import { SplashScreen, Stack } from 'expo-router';
@@ -11,12 +13,13 @@ SplashScreen.preventAutoHideAsync();
 
 function RootLayout() {
     const loaded = useFontsLoader();
+    const { initialized } = useSession();
 
     useEffect(() => {
-        if (loaded) {
+        if (loaded && initialized) {
             SplashScreen.hideAsync();
         }
-    }, [loaded]);
+    }, [loaded, initialized]);
 
     if (!loaded) {
         return null;
@@ -24,7 +27,13 @@ function RootLayout() {
 
     return (
         <Providers>
-            <Stack screenOptions={{ headerShown: false }} />
+            <Stack
+                screenOptions={{
+                    header(props) {
+                        return <AppBar {...props} />;
+                    },
+                }}
+            />
         </Providers>
     );
 }
