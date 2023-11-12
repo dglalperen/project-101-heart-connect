@@ -10,7 +10,7 @@ import Button from '../button';
 function AppBar(props: NativeStackHeaderProps) {
     const theme = useTheme();
 
-    console.log(props.options.title);
+    //console.log(props.options.title);
 
     return (
         <SafeAreaView style={{ backgroundColor: theme.background.val }}>

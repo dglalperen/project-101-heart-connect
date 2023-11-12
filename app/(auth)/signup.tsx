@@ -6,15 +6,18 @@ import Screen from '@src/components/screen';
 import useSession from '@src/hooks/session';
 import tamaguiConfig from '@src/tamagui';
 import Assets from '@src/theme/assets';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useCallback } from 'react';
 import { H5, Image, SizableText, XStack, YStack } from 'tamagui';
 
 function SignupScreen() {
     const { currentUser, isLoggedIn } = useSession();
     const onPressContinueEmail = useCallback(() => {
+        console.clear();
+        console.log('onPressContinueEmail');
+        console.log('Signing in with email and password');
         if (isLoggedIn) {
-            console.warn('sIGNOUT');
+            console.warn('Signout');
             auth().signOut();
 
             return;
@@ -35,8 +38,8 @@ function SignupScreen() {
                 mb="$10"
             />
 
-            <SizableText>{currentUser?.email}</SizableText>
-            <SizableText>{isLoggedIn.toString()}</SizableText>
+            <SizableText>User email: {currentUser?.email}</SizableText>
+            <SizableText>Is logged in:{isLoggedIn.toString()}</SizableText>
 
             <H5
                 fontWeight="bold"
@@ -62,7 +65,8 @@ function SignupScreen() {
                             width="$20"
                             height="$4.5"
                             fontWeight="600"
-                            fontSize="$5">
+                            fontSize="$5"
+                            onPress={() => router.push('/app/home/account')}>
                             Use phone number
                         </Button>
                     </Link>
