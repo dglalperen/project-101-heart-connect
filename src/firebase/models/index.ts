@@ -3,4 +3,5 @@ export const enum Collections {
     Users = 'users',
     Conversations = 'conversations',
     Matches = 'matches',
+    Messages = 'messages',
 }

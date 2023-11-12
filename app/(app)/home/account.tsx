@@ -19,6 +19,7 @@ function AccountScreen() {
             alignItems="center"
             gap="$5">
             <Text>Account Screen</Text>
+           
             <Link
                 href="/signup"
                 asChild

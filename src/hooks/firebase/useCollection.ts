@@ -11,7 +11,6 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
     const getByDoc = useCallback(
         async (docPath: string) => {
             const query = await collection.doc(docPath).get();
-
             if (query.exists) {
                 return query.data();
             } else {

@@ -16,14 +16,23 @@ function SignupScreen() {
         console.clear();
         console.log('onPressContinueEmail');
         console.log('Signing in with email and password');
+
         if (isLoggedIn) {
-            console.warn('Signout');
+            console.warn('User is already logged in. Signing out...');
             auth().signOut();
 
             return;
         }
 
-        auth().signInWithEmailAndPassword('admin@admin.com', 'admin123');
+        try {
+            // Attempt to sign in with the specified credentials
+            // Uncomment the desired account for sign-in
+            //auth().signInWithEmailAndPassword('test@test.com', 'test123');
+            auth().signInWithEmailAndPassword('admin@admin.com', 'admin123');
+        } catch (error) {
+            // Log any errors that occur during sign-in
+            console.error('Error during sign-in:', error);
+        }
     }, [isLoggedIn]);
 
     return (
