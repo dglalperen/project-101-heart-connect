@@ -14,6 +14,8 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
 
             if (query.exists) {
                 return query.data();
+            } else {
+                throw new Error(`Document with path ${docPath} does not exist.`);
             }
         },
         [collection],
@@ -21,11 +23,16 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
 
     const create = useCallback(
         async (data: T) => {
-            const query = await collection.add(data);
+            try {
+                const query = await collection.add(data);
 
-            return getByDoc(query.id);
+                return { id: query.id, ...data };
+            } catch (error) {
+                console.error(`Failed to create document: `, error);
+                throw error;
+            }
         },
-        [collection, getByDoc],
+        [collection],
     );
 
     const update = useCallback(
@@ -33,7 +40,12 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
             docPath: string,
             data: Partial<FirebaseFirestoreTypes.SetValue<T>>,
         ): Promise<void> => {
-            return collection.doc(docPath).update(data);
+            try {
+                return collection.doc(docPath).update(data);
+            } catch (error) {
+                console.error(`Failed to update document at ${docPath}: `, error);
+                throw error;
+            }
         },
         [collection],
     );
