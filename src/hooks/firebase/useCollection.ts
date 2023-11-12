@@ -5,22 +5,28 @@ import { useCallback, useMemo } from 'react';
 function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(collection: Collections) {
     const _document = useMemo(
         () => firestore().collection(collection) as FirebaseFirestoreTypes.CollectionReference<T>,
-        [],
+        [collection],
     );
 
-    const getByDoc = useCallback(async (docPath: string) => {
-        const query = await _document.doc(docPath).get();
+    const getByDoc = useCallback(
+        async (docPath: string) => {
+            const query = await _document.doc(docPath).get();
 
-        if (query.exists) {
-            return query.data();
-        }
-    }, []);
+            if (query.exists) {
+                return query.data();
+            }
+        },
+        [_document],
+    );
 
-    const create = useCallback(async (data: T) => {
-        const query = await _document.add(data);
+    const create = useCallback(
+        async (data: T) => {
+            const query = await _document.add(data);
 
-        return getByDoc(query.id);
-    }, []);
+            return getByDoc(query.id);
+        },
+        [_document, getByDoc],
+    );
 
     const update = useCallback(
         async (
@@ -36,7 +42,7 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(collection
                 return false;
             }
         },
-        [],
+        [_document],
     );
 
     return {
