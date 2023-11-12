@@ -11,7 +11,7 @@ import { H1, YStack, Button, Text } from 'tamagui';
 
 interface RawMatchData {
     id: string;
-    isMatched?: boolean; // Assuming these might be optional in your Firestore data
+    isMatched?: boolean;
     lastMessage?: IMessage;
     participants?: string[];
     conversationId?: string;
