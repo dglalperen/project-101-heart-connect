@@ -2,30 +2,30 @@ import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firest
 import { Collections } from '@src/firebase/models';
 import { useCallback, useMemo } from 'react';
 
-function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(collection: Collections) {
-    const _document = useMemo(
-        () => firestore().collection(collection) as FirebaseFirestoreTypes.CollectionReference<T>,
-        [collection],
+function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collection: Collections) {
+    const collection = useMemo(
+        () => firestore().collection(_collection) as FirebaseFirestoreTypes.CollectionReference<T>,
+        [_collection],
     );
 
     const getByDoc = useCallback(
         async (docPath: string) => {
-            const query = await _document.doc(docPath).get();
+            const query = await collection.doc(docPath).get();
 
             if (query.exists) {
                 return query.data();
             }
         },
-        [_document],
+        [collection],
     );
 
     const create = useCallback(
         async (data: T) => {
-            const query = await _document.add(data);
+            const query = await collection.add(data);
 
             return getByDoc(query.id);
         },
-        [_document, getByDoc],
+        [collection, getByDoc],
     );
 
     const update = useCallback(
@@ -33,15 +33,16 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(collection
             docPath: string,
             data: Partial<FirebaseFirestoreTypes.SetValue<T>>,
         ): Promise<void> => {
-            return _document.doc(docPath).update(data);
+            return collection.doc(docPath).update(data);
         },
-        [_document],
+        [collection],
     );
 
     return {
         getByDoc,
         update,
         create,
+        collection,
     };
 }
 
