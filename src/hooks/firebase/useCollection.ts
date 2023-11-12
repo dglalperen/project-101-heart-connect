@@ -34,6 +34,25 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
         [collection],
     );
 
+    const getSubCollection = useCallback(
+        async (parentDocPath: string, subCollectionName: string) => {
+            try {
+                const subCollectionRef = collection
+                    .doc(parentDocPath)
+                    .collection(subCollectionName);
+                const querySnapshot = await subCollectionRef.get();
+                return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            } catch (error) {
+                console.error(
+                    `Failed to fetch subcollection ${subCollectionName} from ${parentDocPath}: `,
+                    error,
+                );
+                throw error;
+            }
+        },
+        [collection],
+    );
+
     const update = useCallback(
         async (
             docPath: string,
@@ -54,6 +73,7 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
         update,
         create,
         collection,
+        getSubCollection,
     };
 }
 
