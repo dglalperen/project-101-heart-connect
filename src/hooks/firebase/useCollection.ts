@@ -32,15 +32,8 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(collection
         async (
             docPath: string,
             data: Partial<FirebaseFirestoreTypes.SetValue<T>>,
-        ): Promise<boolean> => {
-            try {
-                await _document.doc(docPath).update(data);
-
-                return true;
-            } catch (error) {
-                console.error(error);
-                return false;
-            }
+        ): Promise<void> => {
+            return _document.doc(docPath).update(data);
         },
         [_document],
     );
