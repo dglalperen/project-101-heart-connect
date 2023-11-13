@@ -1,4 +1,7 @@
-import { createStrengthenMask, createThemeBuilder } from '@tamagui/theme-builder';
+import { createSoftenMask, createThemeBuilder } from '@tamagui/theme-builder';
+const strengthenBackground = (template: any) => ({
+    background: template.background,
+});
 
 const colorPalette_Light = [
     '#ffffff',
@@ -56,7 +59,7 @@ const themesBuilder = createThemeBuilder()
         },
     })
     .addMasks({
-        soften: createStrengthenMask(),
+        soften: createSoftenMask(),
     })
     .addThemes({
         light: {
@@ -73,7 +76,7 @@ const themesBuilder = createThemeBuilder()
             mask: 'soften',
             override: {
                 color: 0,
-                background: -2,
+                background: -1,
             },
         },
         subtle: {
