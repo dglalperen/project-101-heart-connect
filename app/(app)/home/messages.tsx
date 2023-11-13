@@ -61,7 +61,7 @@ function MessagesScreen() {
     const renderMatch = ({ item }: { item: IMatch }) => (
         <Button onPress={() => openConversationSheet(item)}>
             <YStack>
-                <Text>Match ID: {item.lastMessage?.message}</Text>
+                <Text>Match ID: {item.matchId}</Text>
                 {/* Render additional match details here */}
             </YStack>
         </Button>

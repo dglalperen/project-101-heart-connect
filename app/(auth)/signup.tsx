@@ -28,7 +28,12 @@ function SignupScreen() {
             // Attempt to sign in with the specified credentials
             // Uncomment the desired account for sign-in
             //auth().signInWithEmailAndPassword('test@test.com', 'test123');
-            auth().signInWithEmailAndPassword('admin@admin.com', 'admin123');
+            auth()
+                .signInWithEmailAndPassword('admin@admin.com', 'admin123')
+                .then(() => {
+                    console.log('Signed in!');
+                    router.push('/(app)/home/account');
+                });
         } catch (error) {
             // Log any errors that occur during sign-in
             console.error('Error during sign-in:', error);
@@ -74,8 +79,7 @@ function SignupScreen() {
                             width="$20"
                             height="$4.5"
                             fontWeight="600"
-                            fontSize="$5"
-                            onPress={() => router.push('/app/home/account')}>
+                            fontSize="$5">
                             Use phone number
                         </Button>
                     </Link>

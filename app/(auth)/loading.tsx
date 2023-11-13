@@ -1,6 +1,8 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import useSession from '@src/hooks/session';
 import { router } from 'expo-router';
 import React, { useEffect } from 'react';
+import { View } from 'react-native';
 import Animated, {
     Easing,
     useSharedValue,
@@ -8,21 +10,13 @@ import Animated, {
     withRepeat,
     withTiming,
 } from 'react-native-reanimated';
-import { YStack, styled } from 'tamagui';
-
-const Container = styled(YStack, {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-});
+import { YStack } from 'tamagui';
 
 const LoadingScreen = () => {
     const rotation = useSharedValue(0);
     const { isLoggedIn, initialized } = useSession();
 
     useEffect(() => {
-        console.log('loading');
-
         if (initialized) {
             if (isLoggedIn) {
                 router.push('/(app)/home/account');
@@ -45,11 +39,22 @@ const LoadingScreen = () => {
     });
 
     return (
-        <Container>
-            <Animated.View
-                style={[{ height: 50, width: 50, backgroundColor: '#E94057' }, animatedStyle]}
-            />
-        </Container>
+        <View
+            style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#fff',
+            }}>
+            <Animated.View style={[{ height: 100, width: 100, borderRadius: 20 }, animatedStyle]}>
+                <MaterialCommunityIcons
+                    name="loading"
+                    size={100}
+                    color="#E94057"
+                />
+            </Animated.View>
+            <YStack height="$12" />
+        </View>
     );
 };
 
