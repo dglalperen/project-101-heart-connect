@@ -3,7 +3,7 @@ import Assets from '@src/theme/assets';
 import { Link } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, FlatList, View, useWindowDimensions } from 'react-native';
-import { Button, XStack, Text, Stack, YStack } from 'tamagui';
+import { Button, Stack, Text, XStack, YStack } from 'tamagui';
 
 interface InformationCarouselContent {
     title: string;
