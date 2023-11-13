@@ -49,7 +49,8 @@ function BasicProfileScreen() {
                 <Button
                     onPress={() => {
                         onSkip(); // Handle the skip action
-                    }}>
+                    }}
+                    >
                     Skip
                 </Button>
             ),
@@ -74,7 +75,7 @@ function BasicProfileScreen() {
     return (
         <Screen mx="$7">
             <H2>Profile Details</H2>
-            <YStack h="$10" />
+            <YStack h="$3" />
             <YStack>
                 <XStack
                     justifyContent="center"
