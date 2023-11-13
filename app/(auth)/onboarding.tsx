@@ -3,7 +3,8 @@ import Assets from '@src/theme/assets';
 import { Link } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, FlatList, View, useWindowDimensions } from 'react-native';
-import { Button, Stack, Text, XStack, YStack } from 'tamagui';
+import { Button, XStack, Text, Stack, YStack } from 'tamagui';
+import { useHeaderVisibility } from '@src/hooks/useHeaderVisibility';
 
 interface InformationCarouselContent {
     title: string;
@@ -69,7 +70,7 @@ const informationCarouselContent: InformationCarouselContent[] = [
 ];
 
 function Onboarding() {
-    const { width: screenWidth } = useWindowDimensions();
+    const { width: screenWidth, height: screenHeight } = useWindowDimensions();
     const ITEM_SIZE = screenWidth * 0.6;
     const SPACER_SIZE = (screenWidth - ITEM_SIZE) / 2;
     const scrollX = useRef(new Animated.Value(0)).current;
@@ -79,6 +80,7 @@ function Onboarding() {
     const flatListRef = useRef<FlatList>(null);
     const imageData = useRef(duplicateDataWithUniqueKeys()).current;
     const currentOffsetX = useRef(0);
+    useHeaderVisibility(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -157,7 +159,6 @@ function Onboarding() {
                                 marginVertical: 50,
                                 width: ITEM_SIZE,
                                 alignItems: 'center',
-                                backgroundColor: '$green10Dark',
                             }}>
                             <Animated.Image
                                 style={{ transform: [{ scale: scale }], width: 200, height: 300 }}
@@ -172,14 +173,14 @@ function Onboarding() {
                 ref={infoCarouselRef}
                 data={informationCarouselContent}
                 showsHorizontalScrollIndicator={false}
-                style={{ maxHeight: screen.height * 0.2 }}
+                style={{ maxHeight: screenHeight * 0.2 }}
                 horizontal
                 pagingEnabled
                 renderItem={({ item, index }) => (
                     <Stack
                         key={index}
-                        width={screen.width}
-                        height={screen.height * 0.2}
+                        width={screenWidth}
+                        height={screenHeight * 0.2}
                         justifyContent="center"
                         alignItems="center">
                         <Text
@@ -216,7 +217,7 @@ function Onboarding() {
             </XStack>
             <Button
                 size="$5"
-                width={screen.width * 0.8}
+                width={screenWidth * 0.8}
                 mb="$6"
                 backgroundColor="$primary"
                 fontWeight="500"
