@@ -122,7 +122,7 @@ function Onboarding() {
             currentOffsetX.current = event.nativeEvent.contentOffset.x;
         },
     });
-    
+
     return (
         <Screen
             justifyContent="center"
@@ -168,7 +168,6 @@ function Onboarding() {
                     );
                 }}
             />
-
             <FlatList
                 ref={infoCarouselRef}
                 data={informationCarouselContent}
@@ -243,4 +242,4 @@ function Onboarding() {
     );
 }
 
-export default OnboardingScreen;
+export default Onboarding;
