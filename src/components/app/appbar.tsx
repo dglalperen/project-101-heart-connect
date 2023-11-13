@@ -3,17 +3,17 @@ import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import tamaguiConfig from '@src/tamagui';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useWindowDimensions } from 'react-native';
 import { Text, XStack, useTheme } from 'tamagui';
 
 import Button from '../button';
 
 function AppBar(props: NativeStackHeaderProps) {
     const theme = useTheme();
-
-    //console.log(props.options.title);
+    const { height: screenHeight } = useWindowDimensions();
 
     return (
-        <SafeAreaView style={{ backgroundColor: theme.background.val }}>
+        <SafeAreaView style={{ backgroundColor: theme.background.val, height: screenHeight * 0.1 }}>
             <XStack
                 p="$5"
                 alignItems="center">
