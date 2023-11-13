@@ -1,24 +1,32 @@
 {
-  "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "channel": "development"
-    },
-    "development-simulator": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "simulator": true
-      },
-      "channel": "development-simulator"
-    },
-    "beta": {
-      "distribution": "internal",
-      "channel": "beta"
-    },
-    "production": {
-      "channel": "production"
+    "build": {
+        "development": {
+            "developmentClient": true,
+            "distribution": "internal",
+            "channel": "development",
+            "env": {
+                "GOOGLE_SERVICES_IOS": "src/firebase/GoogleService-Info.plist",
+                "GOOGLE_SERVICES_ANDROID_JSON": "src/firebase/google-services.json"
+            }
+        },
+        "development-simulator": {
+            "developmentClient": true,
+            "distribution": "internal",
+            "ios": {
+                "simulator": true
+            },
+            "channel": "development-simulator",
+            "env": {
+                "GOOGLE_SERVICES_IOS": "src/firebase/GoogleService-Info.plist",
+                "GOOGLE_SERVICES_ANDROID_JSON": "src/firebase/google-services.json"
+            }
+        },
+        "beta": {
+            "distribution": "internal",
+            "channel": "beta"
+        },
+        "production": {
+            "channel": "production"
+        }
     }
-  }
 }
