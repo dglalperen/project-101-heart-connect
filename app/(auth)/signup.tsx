@@ -53,7 +53,6 @@ function SignupScreen() {
                         height="$4.5">
                         Continue with email
                     </Button>
-
                     <Link
                         href="/onboarding"
                         asChild>
