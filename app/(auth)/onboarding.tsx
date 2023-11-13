@@ -1,9 +1,8 @@
 import Screen from '@src/components/screen';
 import Assets from '@src/theme/assets';
-import screen from '@src/utils/helpers';
 import { Link } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, FlatList, View } from 'react-native';
+import { Animated, FlatList, View, useWindowDimensions } from 'react-native';
 import { Button, Stack, Text, XStack, YStack } from 'tamagui';
 
 interface InformationCarouselContent {
@@ -70,7 +69,7 @@ const informationCarouselContent: InformationCarouselContent[] = [
 ];
 
 function Onboarding() {
-    const screenWidth = screen.width;
+    const { width: screenWidth } = useWindowDimensions();
     const ITEM_SIZE = screenWidth * 0.6;
     const SPACER_SIZE = (screenWidth - ITEM_SIZE) / 2;
     const scrollX = useRef(new Animated.Value(0)).current;
@@ -78,7 +77,7 @@ function Onboarding() {
     const infoCarouselRef = useRef<FlatList<InformationCarouselContent> | null>(null);
     const [activeInfoIndex, setActiveInfoIndex] = useState(0);
     const flatListRef = useRef<FlatList>(null);
-    const [imageData, setImageData] = useState(duplicateDataWithUniqueKeys());
+    const imageData = useRef(duplicateDataWithUniqueKeys()).current;
     const currentOffsetX = useRef(0);
 
     useEffect(() => {
