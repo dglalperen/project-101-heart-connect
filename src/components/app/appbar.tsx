@@ -11,7 +11,6 @@ import Button from '../button';
 function AppBar(props: NativeStackHeaderProps) {
     const theme = useTheme();
     const { height: screenHeight } = useWindowDimensions();
-    //console.log(props.options.title);
 
     return (
         <SafeAreaView style={{ backgroundColor: theme.background.val, height: screenHeight * 0.1 }}>

@@ -6,21 +6,38 @@ import Screen from '@src/components/screen';
 import useSession from '@src/hooks/session';
 import tamaguiConfig from '@src/tamagui';
 import Assets from '@src/theme/assets';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useCallback } from 'react';
 import { H5, Image, SizableText, XStack, YStack } from 'tamagui';
 
 function SignupScreen() {
     const { currentUser, isLoggedIn } = useSession();
     const onPressContinueEmail = useCallback(() => {
+        console.clear();
+        console.log('onPressContinueEmail');
+        console.log('Signing in with email and password');
+
         if (isLoggedIn) {
-            console.warn('sIGNOUT');
+            console.warn('User is already logged in. Signing out...');
             auth().signOut();
 
             return;
         }
 
-        auth().signInWithEmailAndPassword('admin@admin.com', 'admin123');
+        try {
+            // Attempt to sign in with the specified credentials
+            // Uncomment the desired account for sign-in
+            //auth().signInWithEmailAndPassword('test@test.com', 'test123');
+            auth()
+                .signInWithEmailAndPassword('admin@admin.com', 'admin123')
+                .then(() => {
+                    console.log('Signed in!');
+                    router.push('/(app)/home/account');
+                });
+        } catch (error) {
+            // Log any errors that occur during sign-in
+            console.error('Error during sign-in:', error);
+        }
     }, [isLoggedIn]);
 
     return (
@@ -35,8 +52,8 @@ function SignupScreen() {
                 mb="$10"
             />
 
-            <SizableText>{currentUser?.email}</SizableText>
-            <SizableText>{isLoggedIn.toString()}</SizableText>
+            <SizableText>User email: {currentUser?.email}</SizableText>
+            <SizableText>Is logged in:{isLoggedIn.toString()}</SizableText>
 
             <H5
                 fontWeight="bold"

@@ -11,7 +11,6 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
     const getByDoc = useCallback(
         async (docPath: string) => {
             const query = await collection.doc(docPath).get();
-
             if (query.exists) {
                 return query.data();
             } else {
@@ -29,6 +28,25 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
                 return { id: query.id, ...data };
             } catch (error) {
                 console.error(`Failed to create document: `, error);
+                throw error;
+            }
+        },
+        [collection],
+    );
+
+    const getSubCollection = useCallback(
+        async (parentDocPath: string, subCollectionName: string) => {
+            try {
+                const subCollectionRef = collection
+                    .doc(parentDocPath)
+                    .collection(subCollectionName);
+                const querySnapshot = await subCollectionRef.get();
+                return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            } catch (error) {
+                console.error(
+                    `Failed to fetch subcollection ${subCollectionName} from ${parentDocPath}: `,
+                    error,
+                );
                 throw error;
             }
         },
@@ -55,6 +73,7 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
         update,
         create,
         collection,
+        getSubCollection,
     };
 }
 

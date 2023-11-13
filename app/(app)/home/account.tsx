@@ -1,21 +1,27 @@
+import auth from '@react-native-firebase/auth';
 import Screen from '@src/components/screen';
-import { Link } from 'expo-router';
-import React from 'react';
+import { router } from 'expo-router';
+import React, { useCallback } from 'react';
 import { Button, Text } from 'tamagui';
 
 function AccountScreen() {
+    const onPressLogout = useCallback(() => {
+        console.log('Signing out');
+        router.push('/signup');
+        auth().signOut();
+    }, []);
+
     return (
         <Screen
             justifyContent="center"
             alignItems="center"
             gap="$5">
             <Text>Account Screen</Text>
-            <Link
-                href="/login"
-                asChild
-                replace>
-                <Button theme="active">Logout</Button>
-            </Link>
+            <Button
+                onPress={onPressLogout}
+                theme="active">
+                Logout
+            </Button>
         </Screen>
     );
 }
