@@ -3,110 +3,112 @@ import Button from '@src/components/button';
 import Screen from '@src/components/screen';
 import tamaguiConfig from '@src/tamagui';
 import { useCallback, useState } from 'react';
-import { H1, Paragraph, XStack } from 'tamagui';
+import { FlatList } from 'react-native';
+import { H1, Paragraph, View } from 'tamagui';
 
 interface IPassion {
     name: string;
-    icon: () => React.ReactNode;
+    icon: (iconColor?: string) => React.ReactNode;
 }
 
+// TODO: fetch it from database
 const passions: IPassion[] = [
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="camera"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Photography',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="shopping"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Shopping',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 size={20}
                 name="microphone"
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Karaoke',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="tab"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Yoga',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="tab"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Yoga',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="tab"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Yoga',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="tab"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Yoga',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="tab"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Yoga',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="tab"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Yoga',
     },
     {
-        icon: () => (
+        icon: (iconColor?: string) => (
             <MaterialCommunityIcons
                 name="tab"
                 size={20}
-                color={tamaguiConfig.tokens.color.primary.val}
+                color={iconColor ?? tamaguiConfig.tokens.color.primary.val}
             />
         ),
         name: 'Yoga',
@@ -129,36 +131,54 @@ function PassionsScreen() {
         [selectedPassions],
     );
 
+    const renderItem = useCallback(
+        ({ item }: { item: IPassion }) => {
+            const isActive = selectedPassions.includes(item);
+
+            return (
+                <Button
+                    key={item.name}
+                    icon={() => item.icon(isActive ? '#fff' : undefined)}
+                    w="$size.12"
+                    h="$size.5"
+                    mr="$5"
+                    borderColor="$gray5Light"
+                    theme={selectedPassions.includes(item) ? 'active' : undefined}
+                    onPress={() => onSelectPassion(item)}>
+                    {item.name}
+                </Button>
+            );
+        },
+        [selectedPassions],
+    );
+
     return (
         <Screen
             p="$5"
-            justifyContent="center">
-            <H1>Your interests</H1>
-            <Paragraph>
-                Select a few of your interests and let everyone know what you’re passionate about.
-            </Paragraph>
-
-            <XStack
-                flexWrap="wrap"
-                alignSelf="center"
-                gap="$3">
-                {passions.map(passion => (
-                    <Button
-                        key={passion.name}
-                        icon={passion.icon}
-                        w="$size.12"
-                        h="$size.5"
-                        borderColor="$gray5Light"
-                        theme={selectedPassions.includes(passion) ? 'active' : undefined}
-                        onPress={() => onSelectPassion(passion)}>
-                        {passion.name}
-                    </Button>
-                ))}
-            </XStack>
+            justifyContent="center"
+            space="$10">
+            <View>
+                <H1>Your interests</H1>
+                <Paragraph>
+                    Select a few of your interests and let everyone know what you’re passionate
+                    about.
+                </Paragraph>
+            </View>
+            <FlatList
+                data={passions}
+                renderItem={renderItem}
+                numColumns={2}
+                contentContainerStyle={{
+                    gap: 15,
+                    flex: 1,
+                    alignItems: 'center',
+                }}
+            />
 
             <Button
                 theme="active"
-                w="100%">
+                w="100%"
+                h="$7">
                 Continue
             </Button>
         </Screen>
