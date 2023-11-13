@@ -122,7 +122,7 @@ function Onboarding() {
             currentOffsetX.current = event.nativeEvent.contentOffset.x;
         },
     });
-
+    
     return (
         <Screen
             justifyContent="center"
@@ -243,4 +243,4 @@ function Onboarding() {
     );
 }
 
-export default Onboarding;
+export default OnboardingScreen;

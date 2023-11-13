@@ -1,0 +1,1 @@
+Should contain google-services.json and GoogleService-Info.pl
