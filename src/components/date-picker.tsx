@@ -3,6 +3,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '@src/components/button';
 import tamaguiConfig from '@src/tamagui';
 import { useState } from 'react';
+import { Platform } from 'react-native';
 import { H5, Sheet, YStack, Text } from 'tamagui';
 
 const DEFAULT_DISPLAY_STRING = 'Choose birthday day';
@@ -15,20 +16,24 @@ export const DatePicker = ({ getDate }: Props) => {
     const [date, setDate] = useState<Date>(new Date());
     const [displayDate, setDisplayDate] = useState<string | null>();
     const [show, setShow] = useState(false);
-
+    const [visible, setVisible] = useState(false);
 
     const onChange = (_event: any, selectedDate: any) => {
         const currentDate = selectedDate;
         setDate(currentDate);
         setDisplayDate(currentDate.toISOString().slice(0, 10).replace(/-/g, ' - '));
+
+        closeDatePicker()
     };
 
     const showDatepicker = () => {
         setShow(true);
+        setVisible(true);
     };
 
     const closeDatePicker = () => {
         setShow(false);
+        setVisible(false);
         getDate(date);
     };
 
@@ -50,20 +55,9 @@ export const DatePicker = ({ getDate }: Props) => {
                     {displayDate ? displayDate : DEFAULT_DISPLAY_STRING}
                 </Text>
             </Button>
-            <Sheet
-                modal
-                open={show}
-                onOpenChange={setShow}
-                dismissOnSnapToBottom
-                snapPointsMode="constant"
-                snapPoints={[575, 200]}
-                zIndex={100_000}
-                animation="medium">
-                <Sheet.Handle />
-                <Sheet.Frame
-                    paddingTop="$10"
-                    alignItems="center">
-                    <YStack>
+            {Platform.OS === 'android' ? (
+                <>
+                    {visible && (
                         <DateTimePicker
                             value={date}
                             mode="date"
@@ -71,17 +65,46 @@ export const DatePicker = ({ getDate }: Props) => {
                             onChange={onChange}
                             maximumDate={new Date()}
                         />
+                    )}
+                </>
+            ) : (
+                <>
+                    <Sheet
+                        modal
+                        open={show}
+                        onOpenChange={setShow}
+                        dismissOnSnapToBottom
+                        snapPointsMode="constant"
+                        snapPoints={[575, 200]}
+                        zIndex={100_000}
+                        animation="medium">
+                        <Sheet.Handle />
+                        <Sheet.Frame
+                            paddingTop="$10"
+                            alignItems="center">
+                            <YStack>
+                                {visible && (
+                                    <DateTimePicker
+                                        value={date}
+                                        mode="date"
+                                        display="inline"
+                                        onChange={onChange}
+                                        maximumDate={new Date()}
+                                    />
+                                )}
 
-                        <Button
-                            mt="$11"
-                            theme="active"
-                            h="$5"
-                            onPress={closeDatePicker}>
-                            Save
-                        </Button>
-                    </YStack>
-                </Sheet.Frame>
-            </Sheet>
+                                <Button
+                                    mt="$11"
+                                    theme="active"
+                                    h="$5"
+                                    onPress={closeDatePicker}>
+                                    Save
+                                </Button>
+                            </YStack>
+                        </Sheet.Frame>
+                    </Sheet>
+                </>
+            )}
         </>
     );
 };

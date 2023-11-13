@@ -33,6 +33,17 @@
     },
     "plugins": [
       "expo-router",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-community/datetimepicker",
+      [
+          "expo-build-properties",
+          {
+              "ios": {
+                  "useFrameworks": "static"
+              }
+          }
+      ],
       [
         "expo-image-picker",
         {

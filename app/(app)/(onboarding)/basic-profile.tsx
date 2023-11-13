@@ -55,7 +55,6 @@ function BasicProfileScreen() {
 
     return (
         <Screen mx="$7">
-            <YStack h="$10" />
             <H2>Profile Details</H2>
             <YStack h="$10" />
             <YStack>
