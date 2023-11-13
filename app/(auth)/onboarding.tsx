@@ -168,7 +168,6 @@ function Onboarding() {
                     );
                 }}
             />
-
             <FlatList
                 ref={infoCarouselRef}
                 data={informationCarouselContent}
