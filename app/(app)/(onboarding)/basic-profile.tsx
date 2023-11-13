@@ -3,13 +3,14 @@ import { DatePicker } from '@src/components/date-picker';
 import ImagePickerExample from '@src/components/image-picker';
 import Screen from '@src/components/screen';
 import { validateProfileData } from '@src/utils/validation-schemas';
-import { useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import { useNavigation, useRouter } from 'expo-router';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { H2, Input, XStack, YStack, Text } from 'tamagui';
 import { ZodIssue } from 'zod';
 
 function BasicProfileScreen() {
     const router = useRouter();
+    const navigation = useNavigation();
     const [confirmDisabled, setConfirmDisabled] = useState(true);
 
     const [formData, setFormData] = useState({
@@ -41,6 +42,23 @@ function BasicProfileScreen() {
 
         setConfirmDisabled(!!validationErrors);
     }, [formData]);
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button
+                    onPress={() => {
+                        onSkip(); // Handle the skip action
+                    }}>
+                    Skip
+                </Button>
+            ),
+        });
+    }, [navigation]);
+
+    const onSkip = () => {
+        router.push('/gender');
+    };
 
     const onConfirm = () => {
         const validationErrors = validateProfileData(formData);
