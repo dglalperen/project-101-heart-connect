@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, FlatList, View, useWindowDimensions } from 'react-native';
 import { Button, XStack, Text, Stack, YStack } from 'tamagui';
 import { useHeaderVisibility } from '@src/hooks/useHeaderVisibility';
+
 interface InformationCarouselContent {
     title: string;
     description: string;
