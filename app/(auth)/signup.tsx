@@ -7,11 +7,13 @@ import useSession from '@src/hooks/session';
 import tamaguiConfig from '@src/tamagui';
 import Assets from '@src/theme/assets';
 import { Link, router } from 'expo-router';
+import { useHeaderVisibility } from '@src/hooks/useHeaderVisibility';
 import { useCallback } from 'react';
 import { H5, Image, SizableText, XStack, YStack } from 'tamagui';
 
 function SignupScreen() {
     const { currentUser, isLoggedIn } = useSession();
+    useHeaderVisibility(false);
     const onPressContinueEmail = useCallback(() => {
         console.clear();
         console.log('onPressContinueEmail');
