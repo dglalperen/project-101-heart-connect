@@ -7,7 +7,7 @@ import { Button, Text } from 'tamagui';
 function AccountScreen() {
     const onPressLogout = useCallback(() => {
         console.log('Signing out');
-        router.push('/signup');
+        router.replace('/signup');
         auth().signOut();
     }, []);
 

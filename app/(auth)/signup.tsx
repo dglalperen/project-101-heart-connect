@@ -1,44 +1,27 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import auth from '@react-native-firebase/auth';
+import Sheet from '@src/components/app/sheet';
 import Button from '@src/components/button';
 import DividerWithText from '@src/components/divider';
 import Screen from '@src/components/screen';
-import useSession from '@src/hooks/session';
+import RegisterForm from '@src/modules/auth-module/components/register-form';
 import tamaguiConfig from '@src/tamagui';
 import Assets from '@src/theme/assets';
 import { Link, router } from 'expo-router';
-import { useCallback } from 'react';
-import { H5, Image, SizableText, XStack, YStack } from 'tamagui';
+import { useCallback, useState } from 'react';
+import { H3, H5, Image, View, XStack, YStack } from 'tamagui';
 
 function SignupScreen() {
-    const { currentUser, isLoggedIn } = useSession();
+    const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
+
     const onPressContinueEmail = useCallback(() => {
-        console.clear();
-        console.log('onPressContinueEmail');
-        console.log('Signing in with email and password');
+        setIsSheetOpen(v => !v);
+    }, []);
 
-        if (isLoggedIn) {
-            console.warn('User is already logged in. Signing out...');
-            auth().signOut();
+    const onSuccessfullSignUp = useCallback(() => {
+        setIsSheetOpen(false);
 
-            return;
-        }
-
-        try {
-            // Attempt to sign in with the specified credentials
-            // Uncomment the desired account for sign-in
-            //auth().signInWithEmailAndPassword('test@test.com', 'test123');
-            auth()
-                .signInWithEmailAndPassword('admin@admin.com', 'admin123')
-                .then(() => {
-                    console.log('Signed in!');
-                    router.push('/(app)/home/account');
-                });
-        } catch (error) {
-            // Log any errors that occur during sign-in
-            console.error('Error during sign-in:', error);
-        }
-    }, [isLoggedIn]);
+        router.replace('/(app)/home/account');
+    }, []);
 
     return (
         <Screen
@@ -51,9 +34,6 @@ function SignupScreen() {
                 height={100}
                 mb="$10"
             />
-
-            <SizableText>User email: {currentUser?.email}</SizableText>
-            <SizableText>Is logged in:{isLoggedIn.toString()}</SizableText>
 
             <H5
                 fontWeight="bold"
@@ -131,6 +111,17 @@ function SignupScreen() {
                     <Button isText>Privacy Policy</Button>
                 </XStack>
             </YStack>
+
+            <Sheet
+                snapPoints={[40]}
+                open={isSheetOpen}>
+                <View
+                    flex={1}
+                    space>
+                    <H3>Sign up</H3>
+                    <RegisterForm onSuccessfullSignUp={onSuccessfullSignUp} />
+                </View>
+            </Sheet>
         </Screen>
     );
 }

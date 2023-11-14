@@ -1,10 +1,10 @@
 import Screen from '@src/components/screen';
+import { useHeaderVisibility } from '@src/hooks/useHeaderVisibility';
 import Assets from '@src/theme/assets';
 import { Link } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, FlatList, View, useWindowDimensions } from 'react-native';
-import { Button, XStack, Text, Stack, YStack } from 'tamagui';
-import { useHeaderVisibility } from '@src/hooks/useHeaderVisibility';
+import { Button, Stack, Text, XStack, YStack } from 'tamagui';
 
 interface InformationCarouselContent {
     title: string;
@@ -215,16 +215,21 @@ function Onboarding() {
                     />
                 ))}
             </XStack>
-            <Button
-                size="$5"
-                width={screenWidth * 0.8}
-                mb="$6"
-                backgroundColor="$primary"
-                fontWeight="500"
-                borderRadius={15}
-                color="white">
-                Create an Account
-            </Button>
+            <Link
+                href="/signup"
+                asChild
+                replace>
+                <Button
+                    size="$5"
+                    width={screenWidth * 0.8}
+                    mb="$6"
+                    backgroundColor="$primary"
+                    fontWeight="500"
+                    borderRadius={15}
+                    color="white">
+                    Create an Account
+                </Button>
+            </Link>
             <XStack
                 alignItems="center"
                 justifyContent="center"
