@@ -17,7 +17,7 @@ function SignupScreen() {
         setIsSheetOpen(v => !v);
     }, []);
 
-    const onSuccessfullSignUp = useCallback(() => {
+    const onSuccessfulSignUp = useCallback(() => {
         setIsSheetOpen(false);
 
         router.replace('/(app)/home/account');
@@ -119,7 +119,10 @@ function SignupScreen() {
                     flex={1}
                     space>
                     <H3>Sign up</H3>
-                    <RegisterForm onSuccessfullSignUp={onSuccessfullSignUp} />
+                    <RegisterForm
+                        onSuccessfulSignUp={onSuccessfulSignUp}
+                        onError={() => null}
+                    />
                 </View>
             </Sheet>
         </Screen>

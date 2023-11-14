@@ -1,5 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import Firestore from '@react-native-firebase/firestore';
 import Button from '@src/components/button';
+import { Collections } from '@src/firebase/models';
+import { IUser } from '@src/firebase/models/user.model';
+import useCollection from '@src/hooks/firebase/useCollection';
 import useSession from '@src/hooks/session';
 import { useToastController } from '@tamagui/toast';
 import { useCallback } from 'react';
@@ -22,11 +26,13 @@ const ErrorText = styled(Text, {
 });
 
 interface IProps {
-    onSuccessfullSignUp: () => void;
+    onSuccessfulSignUp: () => void;
+    onError: (error: string) => void;
 }
 
-function RegisterForm({ onSuccessfullSignUp }: IProps) {
+function RegisterForm({ onSuccessfulSignUp }: IProps) {
     const { signUp } = useSession();
+    const { createWithDocRef } = useCollection<IUser>(Collections.Users);
     const {
         control,
         formState: { errors, isValid },
@@ -45,8 +51,18 @@ function RegisterForm({ onSuccessfullSignUp }: IProps) {
         async (data: FormData) => {
             if (isValid) {
                 try {
-                    await signUp(data.email, data.password);
-                    onSuccessfullSignUp();
+                    const user = await signUp(data.email, data.password);
+                    await createWithDocRef(user.user.uid, {
+                        birthdate: Firestore.Timestamp.now(),
+                        firstName: '',
+                        gender: '',
+                        interests: [],
+                        lastName: '',
+                        profileImageRef: '',
+                        userId: user.user.uid,
+                    });
+
+                    onSuccessfulSignUp();
                     toastController.show('Signed up successfully!', {
                         toastType: 'success',
                     });
@@ -58,7 +74,7 @@ function RegisterForm({ onSuccessfullSignUp }: IProps) {
                 }
             }
         },
-        [isValid, signUp, toastController, onSuccessfullSignUp],
+        [isValid, signUp, createWithDocRef, onSuccessfulSignUp, toastController],
     );
 
     return (

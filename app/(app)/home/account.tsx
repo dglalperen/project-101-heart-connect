@@ -6,9 +6,12 @@ import { Button, Text } from 'tamagui';
 
 function AccountScreen() {
     const onPressLogout = useCallback(() => {
-        console.log('Signing out');
-        router.replace('/signup');
-        auth().signOut();
+        auth()
+            .signOut()
+            .then(() => {
+                console.log('Signing out');
+                router.replace('/signup');
+            });
     }, []);
 
     return (
