@@ -90,16 +90,20 @@ function SignupScreen() {
                     <XStack
                         justifyContent="space-evenly"
                         mt="$5">
-                        <Button
-                            outlined
-                            w="$size.6"
-                            h="$size.6">
-                            <MaterialCommunityIcons
-                                name="facebook"
-                                size={28}
-                                color={tamaguiConfig.tokens.color.primary.val}
-                            />
-                        </Button>
+                        <Link
+                            href="/gender"
+                            asChild>
+                            <Button
+                                outlined
+                                w="$size.6"
+                                h="$size.6">
+                                <MaterialCommunityIcons
+                                    name="facebook"
+                                    size={28}
+                                    color={tamaguiConfig.tokens.color.primary.val}
+                                />
+                            </Button>
+                        </Link>
 
                         <Button
                             outlined
