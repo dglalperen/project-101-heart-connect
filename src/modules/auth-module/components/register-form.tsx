@@ -27,10 +27,10 @@ const ErrorText = styled(Text, {
 
 interface IProps {
     onSuccessfulSignUp: () => void;
-    onError: (error: string) => void;
+    onError: (error: unknown) => void;
 }
 
-function RegisterForm({ onSuccessfulSignUp }: IProps) {
+function RegisterForm({ onSuccessfulSignUp, onError }: IProps) {
     const { signUp } = useSession();
     const { createWithDocRef } = useCollection<IUser>(Collections.Users);
     const {
@@ -67,14 +67,11 @@ function RegisterForm({ onSuccessfulSignUp }: IProps) {
                         toastType: 'success',
                     });
                 } catch (error) {
-                    console.error(error);
-                    toastController.show('Could not sign up! Please try again later', {
-                        toastType: 'error',
-                    });
+                    onError(error);
                 }
             }
         },
-        [isValid, signUp, createWithDocRef, onSuccessfulSignUp, toastController],
+        [isValid, signUp, createWithDocRef, onSuccessfulSignUp, toastController, onError],
     );
 
     return (

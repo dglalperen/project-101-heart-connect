@@ -23,6 +23,10 @@ function SignupScreen() {
         router.replace('/(app)/home/account');
     }, []);
 
+    const onError = useCallback((error: unknown) => {
+        console.error(error);
+    }, []);
+
     return (
         <Screen
             justifyContent="center"
@@ -121,7 +125,7 @@ function SignupScreen() {
                     <H3>Sign up</H3>
                     <RegisterForm
                         onSuccessfulSignUp={onSuccessfulSignUp}
-                        onError={() => null}
+                        onError={onError}
                     />
                 </View>
             </Sheet>
