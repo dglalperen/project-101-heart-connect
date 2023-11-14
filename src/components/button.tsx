@@ -8,6 +8,12 @@ const Button = styled(TButton, {
                 borderColor: '#F3F3F3',
             },
         },
+        chosen: {
+            true: {
+                color: 'white',
+                backgroundColor: '$primary',
+            },
+        },
         isText: {
             true: {
                 color: '$primary',
