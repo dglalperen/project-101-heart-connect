@@ -15,7 +15,7 @@ function AppBar(props: NativeStackHeaderProps) {
     return (
         <SafeAreaView style={{ backgroundColor: theme.background.val, height: screenHeight * 0.1 }}>
             <XStack
-                p="$5"
+                p="$3"
                 alignItems="center">
                 {props.back && (
                     <Button
