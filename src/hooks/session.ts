@@ -39,7 +39,7 @@ function useSession() {
         const subscriber = auth().onAuthStateChanged(e => onAuthStateChanged(e));
 
         return subscriber;
-    }, [isLoggedIn]);
+    }, [isLoggedIn, onAuthStateChanged]);
 
     return { isLoggedIn, currentUser, initialized, signUp, signIn };
 }

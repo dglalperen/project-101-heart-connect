@@ -1,17 +1,12 @@
 import useSession from '@src/hooks/session';
 import { Redirect } from 'expo-router';
 
-import LoadingScreen from './(auth)/loading';
+import Onboarding from './(auth)/onboarding';
 
 function RootScreen() {
-    console.log('RootScreen');
-    const { isLoggedIn, initialized } = useSession();
+    const { isLoggedIn } = useSession();
 
-    if (!initialized) {
-        return <LoadingScreen />;
-    }
-
-    return isLoggedIn ? <Redirect href="/(app)/home/account" /> : <Redirect href="/signup" />;
+    return isLoggedIn ? <Redirect href="/home" /> : <Onboarding />;
 }
 
 export default RootScreen;

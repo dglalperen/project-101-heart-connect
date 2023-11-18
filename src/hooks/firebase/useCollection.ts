@@ -34,6 +34,18 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
         [collection],
     );
 
+    const createWithDocRef = useCallback(
+        async (docRef: string, data: FirebaseFirestoreTypes.SetValue<T>) => {
+            try {
+                await collection.doc(docRef).set(data);
+            } catch (error) {
+                console.error(`Failed to create document: `, error);
+                throw error;
+            }
+        },
+        [collection],
+    );
+
     const getSubCollection = useCallback(
         async (parentDocPath: string, subCollectionName: string) => {
             try {
@@ -74,6 +86,7 @@ function useCollection<T extends FirebaseFirestoreTypes.DocumentData>(_collectio
         create,
         collection,
         getSubCollection,
+        createWithDocRef,
     };
 }
 
