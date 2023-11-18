@@ -54,12 +54,14 @@ function RegisterForm({ onSuccessfulSignUp, onError }: IProps) {
                     const user = await signUp(data.email, data.password);
                     await createWithDocRef(user.user.uid, {
                         birthdate: Firestore.Timestamp.now(),
-                        firstName: '',
-                        gender: '',
+                        firstName: 'test',
+                        gender: 'Male',
                         interests: [],
-                        lastName: '',
-                        profileImageRef: '',
-                        userId: user.user.uid,
+                        lastName: 'testlastname',
+                        profileImageRef: 'test',
+                        bio: 'test',
+                        isActive: true,
+                        location: new Firestore.GeoPoint(0, 0),
                     });
 
                     onSuccessfulSignUp();
