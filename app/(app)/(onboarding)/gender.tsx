@@ -1,22 +1,19 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Button from '@src/components/button';
 import Screen from '@src/components/screen';
 import { useNavigation, useRouter } from 'expo-router';
 import React, { useLayoutEffect, useState } from 'react';
 import { H2, YStack } from 'tamagui';
 
+const variants = [
+    { value: 'Woman' },
+    { value: 'Man' },
+    { value: 'Genderqueer/Non-Binary' },
+    { value: 'Prefer not to disclose' },
+];
 function GenderScreen() {
-    const navigation = useNavigation();
     const router = useRouter();
-
+    const navigation = useNavigation();
     const [isSelected, setIsSelected] = useState<string | undefined>();
-
-    const variants = [
-        { value: 'Woman' },
-        { value: 'Man' },
-        { value: 'Genderqueer/Non-Binary' },
-        { value: 'Prefer not to disclose' },
-    ];
 
     const pressAction = (type: string) => {
         setIsSelected(type);
@@ -45,27 +42,16 @@ function GenderScreen() {
     return (
         <Screen mx="$7">
             <H2 mb="$13">I am a</H2>
-
             <YStack
                 space="$3"
                 mb="$20">
-                {variants.map(value => (
+                {variants.map((value, index) => (
                     <Button
-                        chosen={isSelected === value.value}
-                        outlined
-                        color={isSelected === value.value ? 'white' : 'black'}
+                        key={index.toString()}
                         h="$6"
-                        id={value.value}
-                        // iconAfter={
-                        //     <MaterialCommunityIcons
-                        //         name="check"
-                        //         size={20}
-                        //         color={isSelected === value.value ? 'white' : 'black'}
-                        //     />
-                        // }
-                        flexDirection="row"
                         fontSize="$6"
-                        justifyContent="space-between"
+                        borderColor="$gray5Light"
+                        theme={isSelected === value.value ? 'active' : undefined}
                         onPress={() => pressAction(value.value)}>
                         {value.value}
                     </Button>
@@ -78,7 +64,7 @@ function GenderScreen() {
                 chosen
                 h="$5"
                 mt="$4"
-                onPress={() => toNextScreen()}>
+                onPress={toNextScreen}>
                 Continue
             </Button>
         </Screen>
