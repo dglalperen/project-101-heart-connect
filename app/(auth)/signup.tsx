@@ -104,16 +104,20 @@ function SignupScreen() {
                             </Button>
                         </Link>
 
-                        <Button
-                            outlined
-                            w="$size.6"
-                            h="$size.6">
-                            <MaterialCommunityIcons
-                                name="apple"
-                                size={28}
-                                color={tamaguiConfig.tokens.color.primary.val}
-                            />
-                        </Button>
+                        <Link
+                            href="/home/discover"
+                            asChild>
+                            <Button
+                                outlined
+                                w="$size.6"
+                                h="$size.6">
+                                <MaterialCommunityIcons
+                                    name="apple"
+                                    size={28}
+                                    color={tamaguiConfig.tokens.color.primary.val}
+                                />
+                            </Button>
+                        </Link>
                     </XStack>
                 </YStack>
                 <XStack
