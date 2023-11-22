@@ -65,7 +65,6 @@ export const users = [
         distance: 11,
         age: 24,
         bio: 'Professional Model',
-
         image: require('../../assets/images/seedphotos/user7.jpg'),
     },
     {

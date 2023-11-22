@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { BackdropBlur, Fill } from '@shopify/react-native-skia';
-import React from 'react';
-import { Animated, GestureResponderHandlers } from 'react-native';
+import React, { useCallback } from 'react';
+import { Animated, GestureResponderHandlers, StyleSheet } from 'react-native';
 import { Card, H5, H6, Image, Text, XStack, YStack } from 'tamagui';
 
 // Possibly change later to take in a user object with all needed properties
@@ -16,6 +16,7 @@ interface DateCardProps extends GestureResponderHandlers {
     isSecond?: boolean;
 }
 
+// TODO: Add side photo scrolling support
 export default function DateCard({
     imageName,
     name,
@@ -38,6 +39,30 @@ export default function DateCard({
         transform: [...swipe.getTranslateTransform(), { rotate }],
     };
 
+    // Opacity animation for the "like" button
+    const likeOpacity = swipe.x.interpolate({
+        inputRange: [0, 500],
+        outputRange: [0, 1],
+        extrapolate: 'clamp',
+    });
+
+    // Opacity animation for the "nope" button
+    const nopeOpacity = swipe.x.interpolate({
+        inputRange: [-500, -25],
+        outputRange: [1, 0],
+        extrapolate: 'clamp',
+    });
+
+    // Function to render the "like" and "nope" buttons conditionally
+    const renderChoice = useCallback(() => {
+        return (
+            <>
+                <Animated.View style={[styles.overlayLike, { opacity: likeOpacity }]} />
+                <Animated.View style={[styles.overlayNope, { opacity: nopeOpacity }]} />
+            </>
+        );
+    }, [likeOpacity, nopeOpacity]);
+
     return (
         <Animated.View
             style={[isFirst && animatedCardStyle]}
@@ -50,7 +75,7 @@ export default function DateCard({
                 height={400}>
                 <Card.Header>
                     <XStack
-                        backgroundColor="rgba(255, 255, 255, 0.11)"
+                        backgroundColor="rgba(189, 195, 199, 0.50)"
                         width={55}
                         height={30}
                         alignContent="center"
@@ -96,13 +121,34 @@ export default function DateCard({
                         alignSelf="center"
                         source={imageName}
                     />
+                    {/* TODO: Implement background blur to the footer of the card */}
                     {/* <BackdropBlur
                     blur={4}
                     clip={{ x: 0, y: 128, width: 256, height: 128 }}>
                     <Fill color="rgba(0, 0, 0, 0.2)" />
                 </BackdropBlur> */}
                 </Card.Background>
+                {isFirst && renderChoice()}
             </Card>
         </Animated.View>
     );
 }
+
+const styles = StyleSheet.create({
+    likeContainer: {
+        left: 45,
+        transform: [{ rotate: '-30deg' }],
+    },
+    nopeContainer: {
+        right: 45,
+        transform: [{ rotate: '30deg' }],
+    },
+    overlayLike: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'green',
+    },
+    overlayNope: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'red',
+    },
+});

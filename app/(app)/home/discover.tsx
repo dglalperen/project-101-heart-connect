@@ -20,7 +20,8 @@ export default function DiscoverScreen() {
     const tiltSign = useRef(new Animated.Value(1)).current;
 
     useEffect(() => {
-        // Reset users data if the array is empty
+        // TODO: Pagination of users (10 - 20 at a time)
+        // TESTING: Reset users data if the array is empty
         if (!users.length) {
             setUsers(usersArray);
         }
@@ -51,7 +52,7 @@ export default function DiscoverScreen() {
                         y: dy,
                     },
                     useNativeDriver: true,
-                }).start(removeTopCard);
+                }).start(() => removeAndHandleChoice(direction));
             } else {
                 // Return the card to its original position
                 Animated.spring(swipe, {
@@ -66,11 +67,21 @@ export default function DiscoverScreen() {
         },
     });
 
-    // remove the top card from the users array
-    const removeTopCard = useCallback(() => {
-        setUsers(prevState => prevState.slice(1));
-        swipe.setValue({ x: 0, y: 0 });
-    }, [swipe]);
+    const removeAndHandleChoice = useCallback(
+        (direction: number) => {
+            if (direction === -1) {
+                // TODO: Dislike Logic
+                console.log('DISLIKE');
+            } else {
+                // TODO: Like logic
+                console.log('LIKE');
+            }
+            // Remove card from the array
+            setUsers(prevState => prevState.slice(1));
+            swipe.setValue({ x: 0, y: 0 });
+        },
+        [swipe],
+    );
 
     // handle user choice (left or right swipe)
     const handleChoice = useCallback(
@@ -79,11 +90,13 @@ export default function DiscoverScreen() {
                 toValue: direction * 500,
                 duration: 400,
                 useNativeDriver: true,
-            }).start(removeTopCard);
+            }).start(() => removeAndHandleChoice(direction));
         },
-        [removeTopCard, swipe.x],
+        [removeAndHandleChoice, swipe.x],
     );
 
+    // TODO: Text and right header button
+    // Set the navigation buttons for this screen
     useLayoutEffect(() => {
         navigation.setOptions({
             title: 'Discover Screen',
@@ -115,6 +128,7 @@ export default function DiscoverScreen() {
                         .map(({ name, bio, age, image }, index) => {
                             const isFirst = index === 0;
                             const dragHandlers = isFirst ? panResponder.panHandlers : {};
+                            // if card is not first then remove the unused details and styling
                             if (index >= 1) {
                                 return (
                                     <DateCard
@@ -148,13 +162,13 @@ export default function DiscoverScreen() {
                         })
                         .reverse()}
                 </ZStack>
-                <DiscoverButtonGroup />
+                <DiscoverButtonGroup handleChoice={handleChoice} />
             </YStack>
         </Screen>
     );
 }
 
-function DiscoverButtonGroup() {
+function DiscoverButtonGroup({ handleChoice }: any) {
     return (
         <XStack
             flex={1}
@@ -164,8 +178,9 @@ function DiscoverButtonGroup() {
             space="$4">
             <Button
                 circular
-                borderColor="black"
-                size="$8">
+                elevation={8}
+                size="$8"
+                onPress={() => handleChoice(-1)}>
                 <MaterialCommunityIcons
                     name="close"
                     color="#E94057"
@@ -174,9 +189,10 @@ function DiscoverButtonGroup() {
             </Button>
             <Button
                 circular
-                borderColor="black"
+                elevation={10}
                 backgroundColor="#E94057"
-                size="$10">
+                size="$10"
+                onPress={() => handleChoice(1)}>
                 <MaterialCommunityIcons
                     name="heart"
                     color="white"
@@ -185,7 +201,7 @@ function DiscoverButtonGroup() {
             </Button>
             <Button
                 circular
-                borderColor="black"
+                elevation={8}
                 size="$8">
                 <MaterialCommunityIcons
                     name="star"
