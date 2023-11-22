@@ -35,15 +35,29 @@ function DiscoverScreen() {
     return (
         <Screen
             alignItems="center"
-            mt="$11">
+            mt="$12">
             <YStack>
-                <DateCard ml="$5" />
-
-                <XStack
+                <ZStack
+                    flex={1}
                     alignContent="center"
                     alignItems="center"
-                    space="$4"
-                    mt="$13">
+                    ml={25}>
+                    <DateCard
+                        scale={1.14}
+                        y={-57}
+                        imageName="p2"
+                    />
+                    <DateCard
+                        scale={1.3}
+                        imageName="p1"
+                    />
+                </ZStack>
+                <XStack
+                    flex={1}
+                    alignContent="center"
+                    alignItems="center"
+                    mt={230}
+                    space="$4">
                     <Button
                         circular
                         borderColor="black"
@@ -83,18 +97,29 @@ function DiscoverScreen() {
 
 export default DiscoverScreen;
 
-export function DateCard(props: CardProps) {
+type DateCardProps = {
+    imageName: string;
+    props?: CardProps;
+};
+
+export function DateCard(props: DateCardProps) {
+    const { imageName, ...other } = props;
+
+    // Testing purposes
+    const images = {
+        p1: require(`../../../assets/images/card-photo.png`),
+        p2: require(`../../../assets/images/card-photo2.png`),
+    };
+
     return (
         <Card
             elevate
-            borderRadius={50}
             width={260}
             height={400}
-            scale={1.3}
-            {...props}>
+            {...other}>
             <Card.Header>
                 <XStack
-                    backgroundColor="rgba(255, 255, 255, 0.1)"
+                    backgroundColor="rgba(255, 255, 255, 0.11)"
                     width={55}
                     height={30}
                     alignContent="center"
@@ -131,16 +156,12 @@ export function DateCard(props: CardProps) {
                     </H6>
                 </YStack>
             </Card.Footer>
-            <Card.Background fullscreen>
+            <Card.Background fullscreen borderRadius="$5">
                 <Image
                     flex={1}
                     resizeMode="contain"
                     alignSelf="center"
-                    source={{
-                        width: 300,
-                        height: 300,
-                        uri: require('../../../assets/images/card-photo.png'),
-                    }}
+                    source={imageName === 'p1' ? images.p1 : images.p2}
                 />
                 {/* <BackdropBlur
                     blur={4}
