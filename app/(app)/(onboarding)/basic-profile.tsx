@@ -49,8 +49,7 @@ function BasicProfileScreen() {
                 <Button
                     onPress={() => {
                         onSkip(); // Handle the skip action
-                    }}
-                    >
+                    }}>
                     Skip
                 </Button>
             ),
