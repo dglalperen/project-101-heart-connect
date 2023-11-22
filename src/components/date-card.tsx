@@ -1,39 +1,53 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { BackdropBlur, Fill } from '@shopify/react-native-skia';
 import React from 'react';
-import { Animated } from 'react-native';
-import { Card, CardProps, H5, H6, Image, Text, XStack, YStack, ZStack } from 'tamagui';
+import { Animated, GestureResponderHandlers } from 'react-native';
+import { Card, H5, H6, Image, Text, XStack, YStack } from 'tamagui';
 
 // Possibly change later to take in a user object with all needed properties
-interface DateCardProps extends CardProps {
-    imageName: string;
-    firstName: string;
-    lastName: string;
+interface DateCardProps extends GestureResponderHandlers {
+    imageName: any;
+    name: string;
     age: number;
     bio: string;
+    isFirst: boolean;
+    swipe: Animated.ValueXY;
+    tiltSign: Animated.Value;
+    isSecond?: boolean;
 }
 
 export default function DateCard({
     imageName,
-    firstName,
-    lastName,
+    name,
     age,
     bio,
+    isFirst,
+    swipe,
+    tiltSign,
+    isSecond,
     ...other
 }: DateCardProps) {
-    // Testing purposes
-    const images = {
-        p1: require(`../../assets/images/card-photo.png`),
-        p2: require(`../../assets/images/card-photo2.png`),
+    // Calculate the rotation of the card based on swipe gesture
+    const rotate = Animated.multiply(swipe.x, tiltSign).interpolate({
+        inputRange: [-100, 0, 100],
+        outputRange: ['8deg', '0deg', '-8deg'],
+    });
+
+    // Animated style for the card with rotation and translation
+    const animatedCardStyle = {
+        transform: [...swipe.getTranslateTransform(), { rotate }],
     };
 
     return (
-        <Animated.View>
+        <Animated.View
+            style={[isFirst && animatedCardStyle]}
+            {...other}>
             <Card
-                elevate
+                elevate={!isSecond}
+                y={isSecond ? -45 : 0}
+                scale={isSecond ? 1.15 : 1.3}
                 width={260}
-                height={400}
-                {...other}>
+                height={400}>
                 <Card.Header>
                     <XStack
                         backgroundColor="rgba(255, 255, 255, 0.11)"
@@ -64,7 +78,7 @@ export default function DateCard({
                             mb={-27}
                             mt={-5}
                             color="white">
-                            {firstName} {lastName}, {age}
+                            {name}, {age}
                         </H5>
                         <H6
                             size="$2"
@@ -80,7 +94,7 @@ export default function DateCard({
                         flex={1}
                         resizeMode="contain"
                         alignSelf="center"
-                        source={imageName === 'p1' ? images.p1 : images.p2}
+                        source={imageName}
                     />
                     {/* <BackdropBlur
                     blur={4}
