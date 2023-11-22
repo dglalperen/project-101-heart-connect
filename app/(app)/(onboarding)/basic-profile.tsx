@@ -44,6 +44,7 @@ function BasicProfileScreen() {
     }, [formData]);
 
     useLayoutEffect(() => {
+        console.log('useLayout');
         navigation.setOptions({
             headerRight: () => (
                 <Button
@@ -54,7 +55,7 @@ function BasicProfileScreen() {
                 </Button>
             ),
         });
-    }, [navigation]);
+    });
 
     const onSkip = () => {
         router.push('/gender');

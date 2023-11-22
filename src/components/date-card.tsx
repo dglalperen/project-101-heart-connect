@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { BackdropBlur, Fill } from '@shopify/react-native-skia';
 import React, { useCallback } from 'react';
 import { Animated, GestureResponderHandlers, StyleSheet } from 'react-native';
-import { Card, H5, H6, Image, Text, XStack, YStack } from 'tamagui';
+import { Card, H4, H6, Image, Text, XStack, YStack } from 'tamagui';
 
 // Possibly change later to take in a user object with all needed properties
 interface DateCardProps extends GestureResponderHandlers {
@@ -41,27 +41,35 @@ export default function DateCard({
 
     // Opacity animation for the "like" button
     const likeOpacity = swipe.x.interpolate({
-        inputRange: [0, 500],
+        inputRange: [0, 800],
         outputRange: [0, 1],
         extrapolate: 'clamp',
     });
 
     // Opacity animation for the "nope" button
     const nopeOpacity = swipe.x.interpolate({
-        inputRange: [-500, -25],
+        inputRange: [-1000, -25],
         outputRange: [1, 0],
         extrapolate: 'clamp',
     });
 
-    // Function to render the "like" and "nope" buttons conditionally
+    // Opacity animation for the "star" button
+    const starOpacity = swipe.y.interpolate({
+        inputRange: [-1000, -25],
+        outputRange: [1, 0],
+        extrapolate: 'clamp',
+    });
+
+    // Function to render the "like", "nope" and "star" buttons conditionally
     const renderChoice = useCallback(() => {
         return (
             <>
                 <Animated.View style={[styles.overlayLike, { opacity: likeOpacity }]} />
                 <Animated.View style={[styles.overlayNope, { opacity: nopeOpacity }]} />
+                <Animated.View style={[styles.overlayStar, { opacity: starOpacity }]} />
             </>
         );
-    }, [likeOpacity, nopeOpacity]);
+    }, [likeOpacity, nopeOpacity, starOpacity]);
 
     return (
         <Animated.View
@@ -70,9 +78,10 @@ export default function DateCard({
             <Card
                 elevate={!isSecond}
                 y={isSecond ? -45 : 0}
-                scale={isSecond ? 1.15 : 1.3}
+                scale={isSecond ? 1.25 : 1.4}
                 width={260}
-                height={400}>
+                height={400}
+                mx={5}>
                 <Card.Header>
                     <XStack
                         backgroundColor="rgba(189, 195, 199, 0.50)"
@@ -99,12 +108,12 @@ export default function DateCard({
                         ml="$2"
                         alignItems="flex-start"
                         flex={1}>
-                        <H5
+                        <H4
                             mb={-27}
                             mt={-5}
                             color="white">
                             {name}, {age}
-                        </H5>
+                        </H4>
                         <H6
                             size="$2"
                             color="white">
@@ -121,6 +130,19 @@ export default function DateCard({
                         alignSelf="center"
                         source={imageName}
                     />
+
+                    {/* <ImageBackground
+                        source={imageName}
+                        style={styles.imageStyle}>
+                        <View style={styles.blurWrap}>
+                            <ImageBackground
+                                source={imageName}
+                                blurRadius={5}
+                                style={styles.blurImageStyle}
+                            />
+                        </View>
+                    </ImageBackground> */}
+
                     {/* TODO: Implement background blur to the footer of the card */}
                     {/* <BackdropBlur
                     blur={4}
@@ -150,5 +172,25 @@ const styles = StyleSheet.create({
     overlayNope: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'red',
+    },
+    overlayStar: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'purple',
+    },
+    blurWrap: {
+        height: 70, //Here we need to specify the height of blurred part
+        width: '100%',
+        position: 'absolute',
+        overflow: 'hidden',
+        bottom: 0,
+    },
+    imageStyle: {
+        height: '100%',
+        width: '100%',
+    },
+    blurImageStyle: {
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
     },
 });

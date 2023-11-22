@@ -19,6 +19,24 @@ export default function DiscoverScreen() {
     const swipe = useRef(new Animated.ValueXY()).current;
     const tiltSign = useRef(new Animated.Value(1)).current;
 
+    // TODO: Text and right header button
+    // Set the navigation buttons for this screen
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button
+                    h="$5"
+                    alignSelf="flex-start"
+                    outlined>
+                    <MaterialCommunityIcons
+                        name="chevron-left"
+                        size={25}
+                    />
+                </Button>
+            ),
+        });
+    });
+
     useEffect(() => {
         // TODO: Pagination of users (10 - 20 at a time)
         // TESTING: Reset users data if the array is empty
@@ -52,7 +70,7 @@ export default function DiscoverScreen() {
                         y: dy,
                     },
                     useNativeDriver: true,
-                }).start(() => removeAndHandleChoice(direction));
+                }).start(() => removeAndHandleChoice(direction, false));
             } else {
                 // Return the card to its original position
                 Animated.spring(swipe, {
@@ -68,12 +86,15 @@ export default function DiscoverScreen() {
     });
 
     const removeAndHandleChoice = useCallback(
-        (direction: number) => {
+        (direction: number, isStarPressed: boolean) => {
             if (direction === -1) {
                 // TODO: Dislike Logic
                 console.log('DISLIKE');
+            } else if (isStarPressed && direction === 1) {
+                // TODO: Star  logic
+                console.log('Star Pressed');
             } else {
-                // TODO: Like logic
+                // TODO: Like Logic
                 console.log('LIKE');
             }
             // Remove card from the array
@@ -84,39 +105,32 @@ export default function DiscoverScreen() {
     );
 
     // handle user choice (left or right swipe)
-    const handleChoice = useCallback(
-        (direction: number) => {
-            Animated.timing(swipe.x, {
-                toValue: direction * 500,
-                duration: 400,
-                useNativeDriver: true,
-            }).start(() => removeAndHandleChoice(direction));
+    const handleButtonChoice = useCallback(
+        (direction: number, isStarPressed: boolean) => {
+            // Animation for star
+            if (isStarPressed) {
+                Animated.timing(swipe.y, {
+                    toValue: -1 * 500,
+                    duration: 400,
+                    useNativeDriver: true,
+                }).start(() => removeAndHandleChoice(direction, isStarPressed));
+            } else {
+                // Animation for nope and like
+                Animated.timing(swipe.x, {
+                    toValue: direction * 500,
+                    duration: 400,
+                    useNativeDriver: true,
+                }).start(() => removeAndHandleChoice(direction, isStarPressed));
+            }
         },
-        [removeAndHandleChoice, swipe.x],
+        [removeAndHandleChoice, swipe.x, swipe.y],
     );
-
-    // TODO: Text and right header button
-    // Set the navigation buttons for this screen
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: 'Discover Screen',
-            headerRight: () => (
-                <Button
-                    color="$primary"
-                    fontWeight="bold"
-                    fontSize="$5"
-                    borderColor="red"
-                    backgroundColor="black">
-                    Skip
-                </Button>
-            ),
-        });
-    }, [navigation]);
 
     return (
         <Screen
             alignItems="center"
-            mx="$7">
+            mx="$7"
+            mt="$3">
             <YStack>
                 <ZStack
                     flex={1}
@@ -162,7 +176,7 @@ export default function DiscoverScreen() {
                         })
                         .reverse()}
                 </ZStack>
-                <DiscoverButtonGroup handleChoice={handleChoice} />
+                <DiscoverButtonGroup handleChoice={handleButtonChoice} />
             </YStack>
         </Screen>
     );
@@ -174,13 +188,13 @@ function DiscoverButtonGroup({ handleChoice }: any) {
             flex={1}
             alignContent="center"
             alignItems="center"
-            mt={230}
-            space="$4">
+            mt={300}
+            space="$5">
             <Button
                 circular
                 elevation={8}
                 size="$8"
-                onPress={() => handleChoice(-1)}>
+                onPress={() => handleChoice(-1, false)}>
                 <MaterialCommunityIcons
                     name="close"
                     color="#E94057"
@@ -192,7 +206,7 @@ function DiscoverButtonGroup({ handleChoice }: any) {
                 elevation={10}
                 backgroundColor="#E94057"
                 size="$10"
-                onPress={() => handleChoice(1)}>
+                onPress={() => handleChoice(1, false)}>
                 <MaterialCommunityIcons
                     name="heart"
                     color="white"
@@ -202,7 +216,8 @@ function DiscoverButtonGroup({ handleChoice }: any) {
             <Button
                 circular
                 elevation={8}
-                size="$8">
+                size="$8"
+                onPress={() => handleChoice(1, true)}>
                 <MaterialCommunityIcons
                     name="star"
                     color="purple"
