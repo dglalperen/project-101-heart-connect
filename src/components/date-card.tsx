@@ -11,6 +11,7 @@ interface DateCardProps extends GestureResponderHandlers {
     age: number;
     bio: string;
     isFirst: boolean;
+    distance: number;
     swipe: Animated.ValueXY;
     tiltSign: Animated.Value;
     isSecond?: boolean;
@@ -23,6 +24,7 @@ export default function DateCard({
     age,
     bio,
     isFirst,
+    distance,
     swipe,
     tiltSign,
     isSecond,
@@ -99,7 +101,7 @@ export default function DateCard({
                         <Text
                             fontSize="$1"
                             color="white">
-                            1 km
+                            {distance} km
                         </Text>
                     </XStack>
                 </Card.Header>

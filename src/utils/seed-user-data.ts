@@ -3,7 +3,7 @@ export const users = [
         id: 1,
         name: 'Luciana Julia',
         location: 'Portland illinois',
-        distance: 11,
+        distance: 4,
         age: 23,
         bio: 'Professional Model',
         image: require('../../assets/images/seedphotos/user1.jpg'),
@@ -22,7 +22,7 @@ export const users = [
         id: 3,
         name: 'Tracy Fradera',
         location: 'Portland illinois',
-        distance: 11,
+        distance: 9,
         age: 24,
         bio: 'Professional Model',
 
@@ -32,7 +32,7 @@ export const users = [
         id: 4,
         name: 'Doreatha Grave',
         location: 'Portland illinois',
-        distance: 11,
+        distance: 2,
         age: 24,
         bio: 'Professional Model',
 
@@ -42,7 +42,7 @@ export const users = [
         id: 5,
         name: 'Jacquetta Bobalik',
         location: 'Portland illinois',
-        distance: 11,
+        distance: 5,
         age: 24,
         bio: 'Professional Model',
 
@@ -52,7 +52,7 @@ export const users = [
         id: 6,
         name: 'Velia Kwasniak',
         location: 'Portland illinois',
-        distance: 11,
+        distance: 6,
         age: 24,
         bio: 'Professional Model',
 

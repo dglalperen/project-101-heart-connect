@@ -139,7 +139,7 @@ export default function DiscoverScreen() {
                     mt={75}
                     ml={25}>
                     {users
-                        .map(({ name, bio, age, image }, index) => {
+                        .map(({ name, bio, age, image, distance }, index) => {
                             const isFirst = index === 0;
                             const dragHandlers = isFirst ? panResponder.panHandlers : {};
                             // if card is not first then remove the unused details and styling
@@ -152,6 +152,7 @@ export default function DiscoverScreen() {
                                         age={age}
                                         bio={bio}
                                         isFirst={isFirst}
+                                        distance={distance}
                                         swipe={swipe}
                                         tiltSign={tiltSign}
                                         isSecond
@@ -168,6 +169,7 @@ export default function DiscoverScreen() {
                                     age={age}
                                     bio={bio}
                                     isFirst={isFirst}
+                                    distance={distance}
                                     swipe={swipe}
                                     tiltSign={tiltSign}
                                     {...dragHandlers}
