@@ -44,18 +44,18 @@ function BasicProfileScreen() {
     }, [formData]);
 
     useLayoutEffect(() => {
+        console.log('useLayout');
         navigation.setOptions({
             headerRight: () => (
                 <Button
                     onPress={() => {
                         onSkip(); // Handle the skip action
-                    }}
-                    >
+                    }}>
                     Skip
                 </Button>
             ),
         });
-    }, [navigation]);
+    });
 
     const onSkip = () => {
         router.push('/gender');
