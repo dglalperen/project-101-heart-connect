@@ -36,6 +36,7 @@
     "@tamagui/toast": "^1.76.0",
     "@types/google-libphonenumber": "^7.4.30",
     "burnt": "^0.12.1",
+    "eject": "^0.0.4",
     "expo": "~49.0.15",
     "expo-build-properties": "~0.8.3",
     "expo-clipboard": "~4.3.1",

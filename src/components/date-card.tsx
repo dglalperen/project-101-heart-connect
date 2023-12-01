@@ -83,7 +83,7 @@ export default function DateCard({
                 scale={isSecond ? 1.25 : 1.4}
                 width={260}
                 height={400}
-                mx={5}>
+                alignSelf="center">
                 <Card.Header>
                     <XStack
                         backgroundColor="rgba(189, 195, 199, 0.50)"

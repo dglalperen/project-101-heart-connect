@@ -5,7 +5,7 @@ import Screen from '@src/components/screen';
 import { users as usersArray } from '@src/utils/seed-user-data';
 import { useNavigation } from 'expo-router';
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Animated, Dimensions, PanResponder } from 'react-native';
+import { Animated, Dimensions, PanResponder, Platform } from 'react-native';
 import { XStack, YStack, ZStack } from 'tamagui';
 
 export default function DiscoverScreen() {
@@ -127,17 +127,13 @@ export default function DiscoverScreen() {
     );
 
     return (
-        <Screen
-            alignItems="center"
-            mx="$7"
-            mt="$3">
-            <YStack>
+        <Screen>
+            <YStack
+                flex={1}
+                mb={Platform.OS === 'android' ? 40 : -10}>
                 <ZStack
                     flex={1}
-                    alignContent="center"
-                    alignItems="center"
-                    mt={75}
-                    ml={25}>
+                    mt="$11">
                     {users
                         .map(({ name, bio, age, image, distance }, index) => {
                             const isFirst = index === 0;
@@ -187,15 +183,13 @@ export default function DiscoverScreen() {
 function DiscoverButtonGroup({ handleChoice }: any) {
     return (
         <XStack
-            flex={1}
-            alignContent="center"
             alignItems="center"
-            mt={300}
-            space="$5">
+            alignSelf="center"
+            space={Platform.OS === 'ios' ? '$6' : '$5'}>
             <Button
                 circular
                 elevation={8}
-                size="$8"
+                size={Platform.OS === 'ios' ? '$7' : '$8'}
                 onPress={() => handleChoice(-1, false)}>
                 <MaterialCommunityIcons
                     name="close"
@@ -207,7 +201,7 @@ function DiscoverButtonGroup({ handleChoice }: any) {
                 circular
                 elevation={10}
                 backgroundColor="#E94057"
-                size="$10"
+                size={Platform.OS === 'ios' ? '$9' : '$10'}
                 onPress={() => handleChoice(1, false)}>
                 <MaterialCommunityIcons
                     name="heart"
@@ -218,7 +212,7 @@ function DiscoverButtonGroup({ handleChoice }: any) {
             <Button
                 circular
                 elevation={8}
-                size="$8"
+                size={Platform.OS === 'ios' ? '$7' : '$8'}
                 onPress={() => handleChoice(1, true)}>
                 <MaterialCommunityIcons
                     name="star"
