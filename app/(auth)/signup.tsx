@@ -12,7 +12,7 @@ import { H3, H5, Image, View, XStack, YStack } from 'tamagui';
 
 function SignupScreen() {
     const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
-  
+
     const onPressContinueEmail = useCallback(() => {
         setIsSheetOpen(v => !v);
     }, []);

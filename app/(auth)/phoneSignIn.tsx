@@ -4,7 +4,7 @@ import { useNavigation } from 'expo-router';
 import React, { useLayoutEffect } from 'react';
 import { H1, SizableText, YStack } from 'tamagui';
 
-function LoginScreen() {
+function PhoneSignIn() {
     const navigation = useNavigation();
 
     useLayoutEffect(() => {
@@ -27,4 +27,4 @@ function LoginScreen() {
     );
 }
 
-export default LoginScreen;
+export default PhoneSignIn;

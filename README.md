@@ -73,7 +73,7 @@ Icon set: MaterialCommunityIcons
 
     (auth)
          /onboarding
-         /login
+         /phoneSignIn
          /signup
          /verify
 ```

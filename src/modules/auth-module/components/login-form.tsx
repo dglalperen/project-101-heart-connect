@@ -3,6 +3,8 @@ import BaseInput from '@src/components/base-input';
 import Button from '@src/components/button';
 import InputWrapper from '@src/components/input-wrapper';
 import PhoneCodePicker from '@src/components/phone-code-picker';
+import useSession from '@src/hooks/session';
+import { router } from 'expo-router';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import React, { useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -11,8 +13,18 @@ import { z } from 'zod';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
+interface ILoginFormInput {
+    phoneCode: string;
+    phoneNumber: string;
+    fullPhoneNumber: string;
+}
+
 const validatePhoneNumber = (value: string) => {
     try {
+        if (value.trim() === '+4912345678910' || value.trim() === '+12345678910') {
+            console.log("I'm a valid phone number");
+            return true;
+        }
         return phoneUtil.isValidNumber(phoneUtil.parse(value.trim()));
     } catch {
         return false;
@@ -29,6 +41,15 @@ const schema = z.object({
 });
 
 function LoginForm() {
+    const { signInWithPhoneNumber } = useSession();
+
+    const onSubmit = async (data: ILoginFormInput) => {
+        console.log('Signing in with phone number');
+        await signInWithPhoneNumber(data.fullPhoneNumber).then(() => {
+            router.replace('/(auth)/verify');
+        });
+    };
+
     const {
         control,
         watch,
@@ -118,7 +139,7 @@ function LoginForm() {
                 disabled={!isValid}
                 theme="active"
                 color="white"
-                onPress={handleSubmit(() => {})}>
+                onPress={handleSubmit(onSubmit)}>
                 Continue
             </Button>
         </>

@@ -6,7 +6,7 @@ import Onboarding from './(auth)/onboarding';
 function RootScreen() {
     const { isLoggedIn } = useSession();
 
-    return isLoggedIn ? <Redirect href="/home" /> : <Onboarding />;
+    return isLoggedIn ? <Redirect href="/home/discover" /> : <Onboarding />;
 }
 
 export default RootScreen;

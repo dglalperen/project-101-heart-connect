@@ -150,7 +150,7 @@ function Onboarding() {
                         index * ITEM_SIZE,
                     ];
                     const scale = scrollX.interpolate({
-                        inputRange: inputRange,
+                        inputRange,
                         outputRange: [0.8, 1, 0.8],
                     });
                     return (
@@ -161,7 +161,7 @@ function Onboarding() {
                                 alignItems: 'center',
                             }}>
                             <Animated.Image
-                                style={{ transform: [{ scale: scale }], width: 200, height: 300 }}
+                                style={{ transform: [{ scale }], width: 200, height: 300 }}
                                 source={item.img}
                                 resizeMode="contain"
                             />
@@ -216,7 +216,7 @@ function Onboarding() {
                 ))}
             </XStack>
             <Link
-                href="/signup"
+                href="/phoneSignIn"
                 asChild
                 replace>
                 <Button
@@ -235,7 +235,7 @@ function Onboarding() {
                 justifyContent="center"
                 w="$25">
                 <Text mr="$1">Already have an account?</Text>
-                <Link href="/login">
+                <Link href="/phoneSignIn">
                     <Text
                         fontWeight="bold"
                         color="$primary">
